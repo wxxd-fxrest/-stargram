@@ -8,13 +8,6 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    // apiKey: "AIzaSyDlcr4dEzrhYFoOkR7oML_bicHp0vEeDZ4",
-    // authDomain: "wood-forest-stargram.firebaseapp.com",
-    // projectId: "wood-forest-stargram",
-    // storageBucket: "wood-forest-stargram.appspot.com",
-    // messagingSenderId: "586124997156",
-    // appId: "1:586124997156:web:f4c15da2f5353f8d229eb1"
-
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_PROJECT_ID,
