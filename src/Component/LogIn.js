@@ -34,7 +34,7 @@ const LogIn = () => {
         <div>
             <h4> Login </h4>
             <form onSubmit={onSubmit}>
-                <Link to="/">
+                <Link to="/Auth">
                     <button> 이전 </button>
                 </Link>
                 <input type="email"
