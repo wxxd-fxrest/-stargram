@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import { auth, db } from "../firebase.js";
 
 const SignUp = () => {
@@ -32,6 +32,7 @@ const SignUp = () => {
                 displayName, 
                 email,
             })
+            await setDoc(doc(db, "Feed", data.user.uid), {})
             navigate("/");
         } catch (err) {
             alert("다시 확인해주세요. (ex, 이미 가입된 정보 또는 이미 사용 중인 이메일입니다.)") ;
