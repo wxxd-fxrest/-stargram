@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { db, storage } from "../firebase";
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable, uploadString } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import Attach from '/Users/drizzle/stargram/src/img/attach.png'
-import { arrayUnion, collection, doc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
+import { arrayUnion, collection, doc, Timestamp, updateDoc } from "firebase/firestore";
 
 const Write = () => {
     const [attachment, setAttachment] = useState("") ; 
@@ -13,6 +13,7 @@ const Write = () => {
     const [messageText, setMessageText] = useState("") ; 
     const {currentUser} = useContext(AuthContext) ; 
     const uuidv4ID = uuidv4()
+    const navigate = useNavigate();
 
     const onSubmit = async(event) => {
         event.preventDefault();
@@ -20,25 +21,28 @@ const Write = () => {
         let attachmentUrl = "" ; 
         if(attachment !== "") {
             const attachmentRef = ref(storage, `images/${currentUser.uid + uuidv4()}`)
-            uploadBytes(attachmentRef, attachment)
-            await uploadString(attachmentRef, attachment, 'data_url').then((url) => {
-                console.log(url)
-            }) 
-        } ;
-    
-        setMessageText("") ; 
-        setAttachment("") ; 
-        const feedUpload = doc(db, "Feed", currentUser.uid)
-        await updateDoc(feedUpload, {
-                messages : arrayUnion({
-                    senderId: currentUser.uid,
-                    text: messageText, 
-                    UUID: uuidv4ID, 
-                    date: Timestamp.now(),
-                    attachmentUrl,
+            const uploadTask = uploadBytes(attachmentRef, attachment)
+            await uploadString(attachmentRef, attachment, 'data_url')
+
+            uploadTask.then(async (snapshot) => {
+                attachmentUrl = await getDownloadURL(snapshot.ref)
+
+                const feedUpload = doc(db, "Feed", "M4koF3uOGI9p59cmDrJG")
+                return updateDoc(feedUpload, {
+                        messages : arrayUnion({
+                            senderUID: currentUser.uid,
+                            message: messageText, 
+                            UUID: uuidv4ID, 
+                            date: Timestamp.now(),
+                            attachmentUrl,
+                    })
+                })
             })
-        })
-    }
+        } ;
+        setAttachment("") ; 
+        setNext("") ;
+        navigate("/");
+    } ;
 
     const onClickNext = () => {
         if (attachment) {
@@ -63,7 +67,7 @@ const Write = () => {
             setAttachment(result) ; 
         } ;
         if (Boolean(theFile)) {
-        reader.readAsDataURL(theFile) ; 
+            reader.readAsDataURL(theFile) ; 
         }
     } ; 
 
@@ -74,14 +78,14 @@ const Write = () => {
                     <button> 이전 </button>
                 </Link>
                 <h4> Write </h4>
-                {/* {next ? 
+                {next ? 
                 <div> 
                     <img src={attachment} width="200px" height="200px" />
                     <input type="textarea" 
                             placeholder="message..."
                             value={messageText || ''}
                             onChange={onChange}/>
-                    <button> 다음 </button>
+                    <input type="submit" value="OK"/> 
                 </div> :
                 <div>
                     <img src={attachment} width="500px" height="500px" />
@@ -94,22 +98,7 @@ const Write = () => {
                         <img src={Attach} alt="" />
                     </label>
                     <button onClick={onClickNext}> 다음 </button>
-                </div> } */}
-
-                    <img src={attachment} width="500px" height="500px" />
-                    <input type="file"
-                            style={{display:"none"}}
-                            id="inputFile"
-                            onChange={onFileChange}
-                            required />
-                    <label htmlFor="inputFile">
-                        <img src={Attach} alt="" />
-                    </label>
-                    <input type="textarea" 
-                            placeholder="message..."
-                            value={messageText || ''}
-                            onChange={onChange}/>
-                    <input type="submit" value="OK"/>
+                </div> }
             </form>
         </div>
     )

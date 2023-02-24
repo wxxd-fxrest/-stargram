@@ -32,7 +32,7 @@ const SignUp = () => {
                 displayName, 
                 email,
             })
-            await setDoc(doc(db, "Feed", data.user.uid), {})
+            // await setDoc(doc(db, "Feed", data.user.uid), {})
             navigate("/");
         } catch (err) {
             alert("다시 확인해주세요. (ex, 이미 가입된 정보 또는 이미 사용 중인 이메일입니다.)") ;
