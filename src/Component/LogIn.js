@@ -1,6 +1,8 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext.js";
 import { auth, db } from "../firebase.js";
 
 const LogIn = () => {
@@ -17,7 +19,7 @@ const LogIn = () => {
             setPassword(value) ; 
         }
     }
-
+    
     const onSubmit = async(event) => {
         event.preventDefault();
         try {

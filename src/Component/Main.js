@@ -1,20 +1,28 @@
-import { Link } from "react-router-dom";
+const Main = ({feed}) => {
+    // console.log(feed)
 
-const Main = () => {
-
-
+    const feedAll = () => {
+        let arr = [] ;
+        if(feed) {
+            for(let i = 0; i < feed.length; i++) {
+                arr.push(
+                    <div key={i}>
+                    {feed ? 
+                        <div className="Main">
+                            <h6> {feed[i].displayName} </h6>
+                            <img alt="" src={feed[i].attachmentUrl} width="200px" height="200px" />
+                            <h5> {feed[i].message} </h5>
+                        </div> : null }
+                    </div>
+                )
+            }
+        }
+        return arr ;
+    }
 
     return (
         <div>
-            <h4>Main</h4>
-            <Link to="/Write">
-                <button> Write </button>
-            </Link>
-            <div className="Main">
-                <h6> name </h6>
-                <img alt="" src="#" width="200px" height="200px" />
-                <h5> feed </h5>
-            </div>
+            {feedAll()}
         </div>
     )
 }

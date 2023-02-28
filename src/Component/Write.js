@@ -1,19 +1,33 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import Attach from '/Users/drizzle/stargram/src/img/attach.png'
-import { arrayUnion, collection, doc, Timestamp, updateDoc } from "firebase/firestore";
+import { arrayUnion, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 
 const Write = () => {
     const [attachment, setAttachment] = useState("") ; 
     const [next, setNext] = useState(false) ; 
     const [messageText, setMessageText] = useState("") ; 
     const {currentUser} = useContext(AuthContext) ; 
+    const [displayName, setDisplayName] = useState("") ; 
     const uuidv4ID = uuidv4()
     const navigate = useNavigate();
+
+    const getName = async() => {
+        const getDisplayName = query(collection(db, "Users"), where("uid", "==", currentUser.uid));
+        const querySnapshot = await getDocs(getDisplayName);
+        querySnapshot.forEach((doc) => {
+            // console.log(doc.id, " => ", doc.data().displayName);
+            setDisplayName(doc.data().displayName)
+        });
+    }
+
+    useEffect(() => {
+        getName()
+    }, []) ;
 
     const onSubmit = async(event) => {
         event.preventDefault();
@@ -30,7 +44,8 @@ const Write = () => {
                 const feedUpload = doc(db, "Feed", "M4koF3uOGI9p59cmDrJG")
                 return updateDoc(feedUpload, {
                         messages : arrayUnion({
-                            senderUID: currentUser.uid,
+                            UID: currentUser.uid,
+                            displayName: displayName, 
                             message: messageText, 
                             UUID: uuidv4ID, 
                             date: Timestamp.now(),

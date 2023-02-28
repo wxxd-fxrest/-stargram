@@ -3,13 +3,15 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Auth from './Route/Auth';
 import LogIn from './Component/LogIn';
 import SignUp from './Component/SignUp';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './Context/AuthContext';
 import Home from './Route/Home';
 import Write from './Component/Write';
+import Profile from './Route/Profile';
 
 const App = () => {
   const {currentUser} = useContext(AuthContext) ; 
+  const [displayName, setDisplayName] = useState("") ; 
 
   const ProtectedRoute = ({children}) => {
     if(!currentUser) {
@@ -30,6 +32,10 @@ const App = () => {
                 <Route path='/Write' element={
                   <ProtectedRoute>
                   <Write />
+                  </ProtectedRoute> } />
+                <Route path='/Profile' element={
+                  <ProtectedRoute>
+                  <Profile />
                   </ProtectedRoute> } />
                 <Route path='/Auth' element={<Auth />} />
                 <Route path='/LogIn' element={<LogIn />} />
