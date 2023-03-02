@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Auth from './Route/Auth';
 import LogIn from './Component/LogIn';
 import SignUp from './Component/SignUp';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from './Context/AuthContext';
 import Home from './Route/Home';
 import Write from './Component/Write';

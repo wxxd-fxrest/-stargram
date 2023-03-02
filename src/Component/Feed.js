@@ -12,13 +12,20 @@ const Feed = () => {
     const {currentUser} = useContext(AuthContext) ; 
 
     const FeedDoc = async() => {
-        onSnapshot(collection(db, 'Feed'), (snapshot) => {
-            let feedArray = snapshot.docs.map(doc => ({
-                ...doc.data(),
-            }))
+        const FeedCollection = query(collection(db, "Feed"));
+        onSnapshot(FeedCollection, (querySnapshot) => {
+            let feedArray = []
+            querySnapshot.forEach((doc) => {
+                feedArray.push({
+                    DocID: doc.id, 
+                    Data: doc.data()
+                })
+            });
             setFeed(feedArray)
-        })
-        const getDisplayName = query(collection(db, "Users"), where("uid", "==", currentUser.uid));
+            // console.log(feed)
+        });
+
+        const getDisplayName = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
         const querySnapshot = await getDocs(getDisplayName);
         querySnapshot.forEach((doc) => {
             // console.log(doc.id, " => ", doc.data().displayName);
@@ -39,9 +46,12 @@ const Feed = () => {
         <div>
             <button onClick={onClick}> Profile </button>
             <h1> {displayName} </h1>
-            {feed.map((f, id) => (
-                <div key={id}>
-                    {visible ? <Main feed={f.messages} /> : <Profile feed={f.messages} />}                
+            {feed.map((f, ID) => (
+                <div key={ID}>
+                    {visible ? 
+                    <Main feed={f} /> 
+                    : 
+                    <Profile feed={f} /> }                
                 </div>
             ))}
         </div>

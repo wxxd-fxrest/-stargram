@@ -32,6 +32,10 @@
   background-color: #f1ff99;
 }
 
+.Profile {
+  background-color: #232808;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

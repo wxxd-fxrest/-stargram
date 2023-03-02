@@ -2,42 +2,32 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import { db } from "../firebase";
-import { collection, collectionGroup, doc, getDocs, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { collection, collectionGroup, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, where } from "firebase/firestore";
 
 
 const Profile = ({feed}) => {
-    const {currentUser} = useContext(AuthContext) ; 
+    const {currentUser} = useContext(AuthContext) ;
+    
+    const onDelete = async() => {
+        const ok = window.confirm("삭제 ㄱ?")
+        if(ok) {
+            await deleteDoc(doc(db, "Feed", `${feed.DocID}`)); 
+        }
+    }
     console.log(feed)
 
-    const feedAll = () => {
-        let arr = [] ;
-        if(feed) {
-            for(let i = 0; i < feed.length; i++) {
-                arr.push(
-                    <div key={i}>
-                    {currentUser.uid === feed[i].UID ?
-                        <div>
-                        {feed ? 
-                            <div className="Main">
-                                <h6> {feed[i].displayName} </h6>
-                                <img alt="" src={feed[i].attachmentUrl} width="200px" height="200px" />
-                                <h5> {feed[i].message} </h5>
-                            </div> : null }
-                        </div> : null}
-                    </div>
-                )
-            }
-        }
-        return arr ;
-    }
-
     return (
-        <div>
-            <h4> Profile </h4>
-            {feedAll()}
-            <Link to="/">
-                <button> 이전 </button>
-            </Link>
+        <div className="Profile">
+            {currentUser.uid === feed.Data.UID ?
+            <div>
+            {feed ? 
+                <div className="Main">
+                    <h6> {feed.Data.displayName} </h6>
+                    <img alt="" src={feed.Data.attachmentUrl} width="200px" height="200px" />
+                    <h5> {feed.Data.message} </h5>
+                    <button onClick={onDelete}> 삭제 </button>
+                </div> : null }
+            </div> : null}
         </div>
     )
 }

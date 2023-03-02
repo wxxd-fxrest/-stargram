@@ -5,7 +5,7 @@ import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import Attach from '/Users/drizzle/stargram/src/img/attach.png'
-import { arrayUnion, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 
 const Write = () => {
     const [attachment, setAttachment] = useState("") ; 
@@ -17,7 +17,7 @@ const Write = () => {
     const navigate = useNavigate();
 
     const getName = async() => {
-        const getDisplayName = query(collection(db, "Users"), where("uid", "==", currentUser.uid));
+        const getDisplayName = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
         const querySnapshot = await getDocs(getDisplayName);
         querySnapshot.forEach((doc) => {
             // console.log(doc.id, " => ", doc.data().displayName);
@@ -33,29 +33,26 @@ const Write = () => {
         event.preventDefault();
 
         let attachmentUrl = "" ; 
+        let uploadTask ; 
         if(attachment !== "") {
             const attachmentRef = ref(storage, `images/${currentUser.uid + uuidv4()}`)
-            const uploadTask = uploadBytes(attachmentRef, attachment)
+            uploadTask = uploadBytes(attachmentRef, attachment)
             await uploadString(attachmentRef, attachment, 'data_url')
-
-            uploadTask.then(async (snapshot) => {
-                attachmentUrl = await getDownloadURL(snapshot.ref)
-
-                const feedUpload = doc(db, "Feed", "M4koF3uOGI9p59cmDrJG")
-                return updateDoc(feedUpload, {
-                        messages : arrayUnion({
-                            UID: currentUser.uid,
-                            displayName: displayName, 
-                            message: messageText, 
-                            UUID: uuidv4ID, 
-                            date: Timestamp.now(),
-                            attachmentUrl,
-                    })
-                })
-            })
         } ;
         setAttachment("") ; 
         setNext("") ;
+        uploadTask.then(async (snapshot) => {
+            attachmentUrl = await getDownloadURL(snapshot.ref)
+
+            await addDoc(collection(db, "Feed"), {
+                UID: currentUser.uid,
+                displayName: displayName, 
+                message: messageText, 
+                UUID: uuidv4ID, 
+                date: Timestamp.now(),
+                attachmentUrl,
+            })
+        })
         navigate("/");
     } ;
 
