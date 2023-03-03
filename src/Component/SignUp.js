@@ -27,7 +27,7 @@ const SignUp = () => {
         try {
             const data = await createUserWithEmailAndPassword(auth, email, password) ; 
             console.log(data) ; 
-            await addDoc(collection(db, "Users"), {
+            await setDoc(doc(db, "Users", `${data.user.uid}`), {
                 uid: data.user.uid, 
                 displayName, 
                 email,

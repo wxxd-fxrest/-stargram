@@ -1,34 +1,74 @@
-import { arrayRemove, collection, deleteDoc, deleteField, doc, updateDoc } from "firebase/firestore";
+import { addDoc, arrayRemove, collection, deleteDoc, deleteField, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 import Profile from "../Route/Profile";
+import Coment from "./Coment";
 
 const Main = ({feed}) => {
     const {currentUser} = useContext(AuthContext) ; 
-    // const [Delete, setDelete] = useState([]) ; 
+    const [textarea, setTextarea] = useState("") ;
+    const [userData, setUserData] = useState("") ; 
+
+    useEffect(() => {
+        getLoginUser() ; 
+    }, []) ;
+
+    const getLoginUser = async() => {
+        const getUserData = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
+        const querySnapshot = await getDocs(getUserData);
+        querySnapshot.forEach((doc) => {
+            setUserData(doc.data())
+        }); 
+    } ;
 
     const onDelete = async() => {
         const ok = window.confirm("삭제 ㄱ?")
         if(ok) {
             await deleteDoc(doc(db, "Feed", `${feed.DocID}`)); 
         }
-    }
+    } ;
+
+    const onClick = async() => {
+        await addDoc(collection(db, "Feed", `${feed.DocID}`, "Coment"), {
+            FeedDocID : feed.DocID, 
+            Coment : textarea, 
+            ReceiveName : feed.Data.displayName,
+            ReceiveUID : feed.Data.UID,
+            SendName : userData.displayName, 
+            SendUID : currentUser.uid, 
+            date: Timestamp.now(),
+        })
+        setTextarea("") ;
+    } ;
 
     // console.log(feed)
     // console.log(DocID)
 
     return (
-        <div>
+        <div onSubmit={(e) => {e.preventDefault()}}>
             {feed ? 
             <div className="Main" >
                 <h6> {feed.Data.displayName} </h6>
                 <img alt="" src={feed.Data.attachmentUrl} width="200px" height="200px" />
                 <h5> {feed.Data.message} </h5>
+                {feed.DocID && <Coment feed={feed} />}
                 {feed.Data.UID == currentUser.uid ? 
                     <div>
                         <button onClick={onDelete}> 삭제 </button>
                     </div> : null}
+                <div>
+                    <input type="textarea"
+                            name="textarea"
+                            placeholder="댓글"
+                            required 
+                            value={textarea}
+                            onChange={(e) => {
+                                const {target : {value}} = e ; 
+                                setTextarea(value) ;
+                            }} />
+                    <button onClick={onClick}> OK </button>
+                </div>
             </div> : null }
         </div>
     )

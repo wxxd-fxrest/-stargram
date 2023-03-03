@@ -8,10 +8,10 @@ import { AuthContext } from './Context/AuthContext';
 import Home from './Route/Home';
 import Write from './Component/Write';
 import Profile from './Route/Profile';
+import Edit from './Component/Edit';
 
 const App = () => {
   const {currentUser} = useContext(AuthContext) ; 
-  const [displayName, setDisplayName] = useState("") ; 
 
   const ProtectedRoute = ({children}) => {
     if(!currentUser) {
@@ -36,6 +36,10 @@ const App = () => {
                 <Route path='/Profile' element={
                   <ProtectedRoute>
                   <Profile />
+                  </ProtectedRoute> } />
+                <Route path='/Edit' element={
+                  <ProtectedRoute>
+                  <Edit />
                   </ProtectedRoute> } />
                 <Route path='/Auth' element={<Auth />} />
                 <Route path='/LogIn' element={<LogIn />} />

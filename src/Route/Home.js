@@ -17,6 +17,9 @@ const Home = () => {
             <Link to="/Write">
                 <button> Write </button>
             </Link>
+            <Link to="/Edit">
+                <button> Edit </button>
+            </Link>
             <Feed />
         </div>
     )
