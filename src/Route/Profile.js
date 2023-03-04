@@ -6,16 +6,30 @@ import { collection, collectionGroup, deleteDoc, doc, getDocs, onSnapshot, order
 import Coment from "../Component/Coment";
 
 
-const Profile = ({feed}) => {
+const Profile = ({feed, userData}) => {
     const {currentUser} = useContext(AuthContext) ;
-    
+    const [feedUser, setFeedUser] = useState([]) ;
+
+    const getLoginUser = async() => {
+        const getUserData = query(collection(db, "Users"), where("uid", "==", `${feed.Data.UID}`));
+        const querySnapshot = await getDocs(getUserData);
+        querySnapshot.forEach((doc) => {
+            setFeedUser(doc.data()) ;
+        }); 
+    } ;
+
+    useEffect(() => {
+        getLoginUser() ;
+    }, []) ;
+
     const onDelete = async() => {
         const ok = window.confirm("삭제 ㄱ?")
         if(ok) {
             await deleteDoc(doc(db, "Feed", `${feed.DocID}`)); 
         }
-    }
-    console.log(feed)
+    } ;
+
+    // console.log(feed)
 
     return (
         <div className="Profile">
@@ -23,6 +37,7 @@ const Profile = ({feed}) => {
             <div>
             {feed ? 
                 <div className="Main">
+                    <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
                     <h6> {feed.Data.displayName} </h6>
                     <img alt="" src={feed.Data.attachmentUrl} width="200px" height="200px" />
                     <h5> {feed.Data.message} </h5>

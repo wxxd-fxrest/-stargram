@@ -3,12 +3,16 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Auth from './Route/Auth';
 import LogIn from './Component/LogIn';
 import SignUp from './Component/SignUp';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from './Context/AuthContext';
 import Home from './Route/Home';
 import Write from './Component/Write';
 import Profile from './Route/Profile';
 import Edit from './Component/Edit';
+
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from './firebase';
+import { UserInfoContext } from './Context/UserInfoContext';
 
 const App = () => {
   const {currentUser} = useContext(AuthContext) ; 

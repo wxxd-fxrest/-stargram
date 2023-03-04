@@ -4,23 +4,13 @@ import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 import Profile from "../Route/Profile";
 import Coment from "./Coment";
+import Attach from '/Users/drizzle/stargram/src/img/attach.png'
 
-const Main = ({feed}) => {
+const Main = ({feed, userData}) => {
     const {currentUser} = useContext(AuthContext) ; 
     const [textarea, setTextarea] = useState("") ;
-    const [userData, setUserData] = useState("") ; 
+    const [feedUser, setFeedUser] = useState([]) ;
 
-    useEffect(() => {
-        getLoginUser() ; 
-    }, []) ;
-
-    const getLoginUser = async() => {
-        const getUserData = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
-        const querySnapshot = await getDocs(getUserData);
-        querySnapshot.forEach((doc) => {
-            setUserData(doc.data())
-        }); 
-    } ;
 
     const onDelete = async() => {
         const ok = window.confirm("삭제 ㄱ?")
@@ -37,20 +27,35 @@ const Main = ({feed}) => {
             ReceiveUID : feed.Data.UID,
             SendName : userData.displayName, 
             SendUID : currentUser.uid, 
+            SendPhotoURL : userData.attachmentUrl,
             date: Timestamp.now(),
         })
         setTextarea("") ;
     } ;
 
+    const getLoginUser = async() => {
+        const getUserData = query(collection(db, "Users"), where("uid", "==", `${feed.Data.UID}`));
+        const querySnapshot = await getDocs(getUserData);
+        querySnapshot.forEach((doc) => {
+            setFeedUser(doc.data()) ;
+        }); 
+    } ;
+
+    useEffect(() => {
+        getLoginUser()
+    }, [])
+
     // console.log(feed)
     // console.log(DocID)
+    // console.log(userData)
 
     return (
         <div onSubmit={(e) => {e.preventDefault()}}>
             {feed ? 
-            <div className="Main" >
+            <div className="Main">
+                <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
                 <h6> {feed.Data.displayName} </h6>
-                <img alt="" src={feed.Data.attachmentUrl} width="200px" height="200px" />
+                <img src={feed.Data.attachmentUrl} width="200px" height="200px" />
                 <h5> {feed.Data.message} </h5>
                 {feed.DocID && <Coment feed={feed} />}
                 {feed.Data.UID == currentUser.uid ? 

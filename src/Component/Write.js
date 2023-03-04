@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Attach from '/Users/drizzle/stargram/src/img/attach.png'
 import { addDoc, arrayUnion, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 
-const Write = () => {
+const Write = ({userInfo}) => {
     const [attachment, setAttachment] = useState("") ; 
     const [next, setNext] = useState(false) ; 
     const [messageText, setMessageText] = useState("") ; 
@@ -16,18 +16,18 @@ const Write = () => {
     const uuidv4ID = uuidv4()
     const navigate = useNavigate();
 
-    const getName = async() => {
-        const getDisplayName = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
-        const querySnapshot = await getDocs(getDisplayName);
+    const getUserInfo = async() => {
+        const getInfo = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
+        const querySnapshot = await getDocs(getInfo);
         querySnapshot.forEach((doc) => {
-            // console.log(doc.id, " => ", doc.data().displayName);
+            console.log(doc.id, " => ", doc.data());
             setDisplayName(doc.data().displayName)
         });
-    }
+    } ;
 
     useEffect(() => {
-        getName()
-    }, []) ;
+        getUserInfo()
+    }, []) ; 
 
     const onSubmit = async(event) => {
         event.preventDefault();

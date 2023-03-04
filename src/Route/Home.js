@@ -10,6 +10,7 @@ const Home = () => {
         signOut(auth)
         alert("Log Out 완료")
     } ;
+
     return (
         <div>
             <h4> Home </h4>

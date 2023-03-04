@@ -1,4 +1,4 @@
-import { collection, getDocs, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
@@ -11,13 +11,13 @@ const Feed = () => {
     const [visible, setVisible] = useState(true) ; 
     const {currentUser} = useContext(AuthContext) ; 
     const [profile, setProfile] = useState(false) ; 
+    const [userData, setUserData] = useState("") ; 
 
     const FeedDoc = async() => {
-        const getDisplayName = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
-        const querySnapshot = await getDocs(getDisplayName);
+        const getUserData = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
+        const querySnapshot = await getDocs(getUserData);
         querySnapshot.forEach((doc) => {
-            // console.log(doc.id, " => ", doc.data().displayName);
-            setDisplayName(doc.data().displayName)
+            setUserData(doc.data()) ;
         }); 
 
         const FeedCollection = query(collection(db, "Feed"), orderBy("date", "desc"));
@@ -29,14 +29,13 @@ const Feed = () => {
                     Data: doc.data(),
                 })
             });
-            setFeed(feedArray)
-            // console.log(feedArray)
+            setFeed(feedArray) ;
         });
-
+        console.log(feed)
     } ;
 
     useEffect(() => {
-        FeedDoc()
+        FeedDoc() ;
     }, []) ; 
 
     const toggleAccount = () => setProfile((prev) => !prev) ;
@@ -47,13 +46,13 @@ const Feed = () => {
                   {profile ? "Main" : "Profile"} 
             </span>
             {profile ? <h1>profile</h1> : <h1> main </h1>}
-            <h3> {displayName} </h3>
+            <h3> {userData.displayName} </h3>
             {feed.map((f, ID) => (
                 <div key={ID}>
                     {profile ? 
-                    <Profile feed={f} /> 
+                    <Profile feed={f} userData={userData} /> 
                     : 
-                    <Main feed={f} /> }                
+                    <Main feed={f} userData={userData}/> }                
                 </div>
             ))}
         </div>

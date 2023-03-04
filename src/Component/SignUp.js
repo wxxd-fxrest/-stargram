@@ -1,8 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
-import { auth, db } from "../firebase.js";
+import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore"; 
+import { auth, db, storage } from "../firebase.js";
+import { getDownloadURL, uploadBytes, uploadString, ref } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
+import Attach from '/Users/drizzle/stargram/src/img/attach.png'
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -10,6 +13,22 @@ const SignUp = () => {
     const [email, setEmail] = useState("") ; 
     const [password, setPassword] = useState("") ; 
     const [displayName, setDisplayName] = useState("") ; 
+    const [attachment, setAttachment] = useState("") ; 
+    const uuidv4ID = uuidv4()
+
+    const onFileChange = (event) => {
+        setAttachment(null) ;
+        const {target: {files}} = event ; 
+        const theFile = files[0] ; 
+        const reader = new FileReader() ; 
+        reader.onloadend = (finishedEvent) => {
+            const {currentTarget: {result}} = finishedEvent ; 
+            setAttachment(result) ; 
+        } ;
+        if (Boolean(theFile)) {
+            reader.readAsDataURL(theFile) ; 
+        }
+    } ; 
 
     const onChange = (event) => {
         const {target : {name, value}} = event ; 
@@ -24,15 +43,26 @@ const SignUp = () => {
 
     const onSubmit = async(event) => {
         event.preventDefault();
+
         try {
             const data = await createUserWithEmailAndPassword(auth, email, password) ; 
             console.log(data) ; 
-            await setDoc(doc(db, "Users", `${data.user.uid}`), {
-                uid: data.user.uid, 
-                displayName, 
-                email,
+            let attachmentUrl = "" ; 
+            let uploadTask ; 
+            if(attachment !== "") {
+                const attachmentRef = ref(storage, `images/${data.user.uid + uuidv4()}`)
+                uploadTask = uploadBytes(attachmentRef, attachment)
+                await uploadString(attachmentRef, attachment, 'data_url')
+            } ;
+            uploadTask.then(async (snapshot) => {
+                attachmentUrl = await getDownloadURL(snapshot.ref) ;
+                await setDoc(doc(db, "Users", `${data.user.uid}`), {
+                    uid: data.user.uid, 
+                    displayName, 
+                    email,
+                    attachmentUrl,
+                })
             })
-            // await setDoc(doc(db, "Feed", data.user.uid), {})
             navigate("/");
         } catch (err) {
             alert("다시 확인해주세요. (ex, 이미 가입된 정보 또는 이미 사용 중인 이메일입니다.)") ;
@@ -47,6 +77,17 @@ const SignUp = () => {
                 <Link to="/Auth">
                     <button> 이전 </button>
                 </Link>
+                <img src={attachment} width="200px" height="200px" />
+                    <input type="file"
+                            style={{display:"none"}}
+                            id="inputFile"
+                            onChange={onFileChange}
+                            required />
+                    <label htmlFor="inputFile">
+                        <img src={Attach} alt="" />
+                    </label>
+                    <input type="submit" value="OK"/> 
+
                 <input type="text"
                         name="displayName"
                         placeholder="Display name"
