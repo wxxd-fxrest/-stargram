@@ -9,7 +9,6 @@ const Coment = ({feed}) => {
     const [coment, setComent] = useState([]) ; 
 
     const ComentDoc = async() => {
-
         const FeedCollection = query(collection(db, "Feed", `${feed.DocID}`, "Coment"), 
             orderBy("date", "asc"));
         onSnapshot(FeedCollection, (querySnapshot) => {
@@ -34,7 +33,7 @@ const Coment = ({feed}) => {
         <div>
             {coment.map((c, ID) => (
                 <div key={ID}>
-                    <Receive coment={c} />
+                    <Receive coment={c} feed={feed} />
                 </div> 
             ))}
         </div>

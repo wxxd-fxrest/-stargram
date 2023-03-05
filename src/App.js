@@ -13,6 +13,7 @@ import Edit from './Component/Edit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from './firebase';
 import { UserInfoContext } from './Context/UserInfoContext';
+import AboutFeed from './Route/AboutFeed';
 
 const App = () => {
   const {currentUser} = useContext(AuthContext) ; 
@@ -48,6 +49,7 @@ const App = () => {
                 <Route path='/Auth' element={<Auth />} />
                 <Route path='/LogIn' element={<LogIn />} />
                 <Route path='/SignUp' element={<SignUp />} />
+                <Route path='/feed/:displayName/:uid' element={<AboutFeed />} />
               </Route>
           </Routes>
       </BrowserRouter>
