@@ -31,7 +31,6 @@ const Feed = () => {
             });
             setFeed(feedArray) ;
         });
-        console.log(feed)
     } ;
 
     useEffect(() => {

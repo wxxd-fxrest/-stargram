@@ -49,7 +49,7 @@ const App = () => {
                 <Route path='/Auth' element={<Auth />} />
                 <Route path='/LogIn' element={<LogIn />} />
                 <Route path='/SignUp' element={<SignUp />} />
-                <Route path='/feed/:displayName/:uid' element={<AboutFeed />} />
+                <Route path='/feed/:uid/:DocID' element={<AboutFeed />} />
               </Route>
           </Routes>
       </BrowserRouter>

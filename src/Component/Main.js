@@ -12,7 +12,7 @@ const Main = ({feed, userData}) => {
     const {currentUser} = useContext(AuthContext) ; 
     const [textarea, setTextarea] = useState("") ;
     const [feedUser, setFeedUser] = useState([]) ;
-    const navigate = useNavigate();
+    const url = `/feed/${feed.Data.UID}/${feed.DocID}` ; 
 
     const onDelete = async() => {
         const ok = window.confirm("삭제 ㄱ?")
@@ -47,11 +47,6 @@ const Main = ({feed, userData}) => {
         getLoginUser()
     }, [])
 
-    // const onClickAbout = () => {
-    //     navigate("/feed/`${feed.Data.displayName}`/`${feed.Data.UID}`");
-    // }
-
-    const url = `/feed/${feed.Data.displayName}/${feed.DocID}` ; 
     // http://localhost:3000/feed/user1/unK5tTmBBTfVpfX993dGIXXzGU42
 
     // console.log(feed)
@@ -68,7 +63,7 @@ const Main = ({feed, userData}) => {
                 {feed ? 
                 <div className="Main">
                     <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
-                    <h6> {feed.Data.displayName} </h6>
+                    <h6> {feedUser.displayName} </h6>
                     <img src={feed.Data.attachmentUrl} width="200px" height="200px" />
                     <h5> {feed.Data.message} </h5>
                     {feed.DocID && <Coment feed={feed} />}
