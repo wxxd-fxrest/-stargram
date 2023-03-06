@@ -14,6 +14,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from './firebase';
 import { UserInfoContext } from './Context/UserInfoContext';
 import AboutFeed from './Route/AboutFeed';
+import AboutProfile from './Route/AboutProfile';
 
 const App = () => {
   const {currentUser} = useContext(AuthContext) ; 
@@ -50,6 +51,7 @@ const App = () => {
                 <Route path='/LogIn' element={<LogIn />} />
                 <Route path='/SignUp' element={<SignUp />} />
                 <Route path='/feed/:uid/:DocID' element={<AboutFeed />} />
+                <Route path='/Profile/:displayName/:uid' element={<AboutProfile />} />
               </Route>
           </Routes>
       </BrowserRouter>

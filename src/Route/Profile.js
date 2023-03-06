@@ -9,6 +9,7 @@ import Coment from "../Component/Coment";
 const Profile = ({feed, userData}) => {
     const {currentUser} = useContext(AuthContext) ;
     const [feedUser, setFeedUser] = useState([]) ;
+    const url = `/feed/${feed.Data.UID}/${feed.DocID}` ; 
 
     const getLoginUser = async() => {
         const getUserData = query(collection(db, "Users"), where("uid", "==", `${feed.Data.UID}`));
@@ -32,13 +33,15 @@ const Profile = ({feed, userData}) => {
     // console.log(feed)
 
     return (
-        <div className="Profile">
+        <div>
             {currentUser.uid === feed.Data.UID ?
             <div>
             {feed ? 
                 <div className="Main">
-                    <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
-                    <h6> {feed.Data.displayName} </h6>
+                    <Link to={url}>
+                        <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
+                        <h6> {feed.Data.displayName} </h6>
+                    </Link>
                     <img alt="" src={feed.Data.attachmentUrl} width="200px" height="200px" />
                     <h5> {feed.Data.message} </h5>
                     <Coment feed={feed}/>

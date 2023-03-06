@@ -20,7 +20,7 @@ const Write = ({userInfo}) => {
         const getInfo = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
         const querySnapshot = await getDocs(getInfo);
         querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
+            // console.log(doc.id, " => ", doc.data());
             setDisplayName(doc.data().displayName)
         });
     } ;

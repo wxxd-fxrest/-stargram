@@ -3,18 +3,17 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 
-const Receive = ({coment, feed}) => {
+const Receive = ({coment, pathDocID}) => {
     const {currentUser} = useContext(AuthContext) ; 
 
     const onDelete = async() => {
         const ok = window.confirm("삭제 ㄱ?")
         if(ok) {
-            await deleteDoc(doc(db, "Feed", `${feed.DocID}`, "Coment", `${coment.DocID}`)); 
+            await deleteDoc(doc(db, "Feed", `${pathDocID}`, "Coment", `${coment.DocID}`)); 
         }
     } ;
     
-    // console.log(coment)
-    // console.log(feed)
+    console.log(coment)
     return (
         <div>
             {coment ? 
