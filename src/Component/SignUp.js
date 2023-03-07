@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore"; 
+import { setDoc, doc } from "firebase/firestore"; 
 import { auth, db, storage } from "../firebase.js";
 import { getDownloadURL, uploadBytes, uploadString, ref } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';

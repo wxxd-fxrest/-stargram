@@ -5,7 +5,7 @@ import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import Attach from '/Users/drizzle/stargram/src/img/attach.png'
-import { addDoc, arrayUnion, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, Timestamp, where } from "firebase/firestore";
 
 const Write = ({userInfo}) => {
     const [attachment, setAttachment] = useState("") ; 

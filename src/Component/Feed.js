@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
@@ -7,8 +7,6 @@ import Main from "./Main";
 
 const Feed = () => {
     const [feed, setFeed] = useState([]) ;
-    const [displayName, setDisplayName] = useState("") ; 
-    const [visible, setVisible] = useState(true) ; 
     const {currentUser} = useContext(AuthContext) ; 
     const [profile, setProfile] = useState(false) ; 
     const [userData, setUserData] = useState("") ; 

@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
@@ -13,7 +13,8 @@ const Receive = ({coment, pathDocID}) => {
         }
     } ;
     
-    console.log(coment)
+    // console.log(coment) ;
+    
     return (
         <div>
             {coment ? 

@@ -1,5 +1,4 @@
-import { async } from "@firebase/util";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, Timestamp, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, Timestamp, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Coment from "../Component/Coment";
@@ -12,7 +11,6 @@ const AboutFeed = () => {
     const [feed, setFeed] = useState("") ;
     const [textarea, setTextarea] = useState("") ;
     const [userData, setUserData] = useState("") ;
-    // const [userData2, setUserData2] = useState("") ;
     const navigate = useNavigate();
 
     const [sendUser, setSendUser] = useState("") ;
@@ -20,7 +18,6 @@ const AboutFeed = () => {
     const pathname = location.pathname ; 
     const pathUID = (pathname.split('/')[2]);
     const pathDocID= (pathname.split('/')[3]);
-    // console.log("pathDocID => ", pathDocID, "pathUID => ", pathUID)
 
     const getFeed = async() => {
         onSnapshot(doc(db, "Feed", pathDocID), (doc) => {
@@ -68,6 +65,7 @@ const AboutFeed = () => {
     // console.log("userData => ", userData)
     // console.log(userData2)
     // console.log(sendUser)
+    // console.log("pathDocID => ", pathDocID, "pathUID => ", pathUID)
 
     return (
         <div>

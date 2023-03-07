@@ -4,14 +4,12 @@ import { AuthContext } from "../Context/AuthContext";
 import { db, storage } from "../firebase";
 import { v4 as uuidv4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
-import { addDoc, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import Attach from '/Users/drizzle/stargram/src/img/attach.png'
-import { async } from "@firebase/util";
 
 const Edit = () => {
     const [attachment, setAttachment] = useState("") ; 
     const [next, setNext] = useState(false) ; 
-    const [messageText, setMessageText] = useState("") ; 
     const {currentUser} = useContext(AuthContext) ; 
     const [displayName, setDisplayName] = useState("") ; 
     const [userData, setUserData] = useState("") ; 

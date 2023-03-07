@@ -1,9 +1,7 @@
 import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import Feed from "../Component/Feed";
-import Main from "../Component/Main";
 import { auth } from "../firebase";
-import Profile from "./Profile";
 
 const Home = () => {
     const onClickLogOut = () => {
@@ -20,6 +18,9 @@ const Home = () => {
             </Link>
             <Link to="/Edit">
                 <button> Edit </button>
+            </Link>
+            <Link to="/DirectMessage">
+                <button> DirectMessage </button>
             </Link>
             <Feed />
         </div>

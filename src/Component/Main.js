@@ -1,12 +1,8 @@
-import { addDoc, arrayRemove, collection, deleteDoc, deleteField, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
-import AboutFeed from "../Route/AboutFeed";
-import Profile from "../Route/Profile";
-import Coment from "./Coment";
-import Attach from '/Users/drizzle/stargram/src/img/attach.png'
 
 const Main = ({feed}) => {
     const {currentUser} = useContext(AuthContext) ; 

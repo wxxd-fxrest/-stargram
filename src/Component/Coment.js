@@ -1,11 +1,9 @@
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Context/AuthContext";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Receive from "./Receive";
 
 const Coment = ({pathDocID}) => {
-    const {currentUser} = useContext(AuthContext) ; 
     const [coment, setComent] = useState([]) ; 
 
     const ComentDoc = async() => {
@@ -21,10 +19,7 @@ const Coment = ({pathDocID}) => {
             });
             setComent(feedArray)
         });
-
-
-    }
-    // console.log(coment)
+    } ; 
 
     useEffect(() => {
         ComentDoc() ;
@@ -32,6 +27,8 @@ const Coment = ({pathDocID}) => {
 
     // console.log("Coment Feed => ", feed)
     // console.log(feedUser)
+    // console.log(coment)
+
     return (
         <div>
             {coment.map((c, ID) => (
