@@ -22,7 +22,7 @@ const LogIn = () => {
         event.preventDefault();
         try {
             const data = await signInWithEmailAndPassword(auth, email, password) ;
-            console.log(data) ; 
+            // console.log(data) ; 
             navigate("/");
         } catch (err) {
             alert("다시 확인해주세요. (ex, 이미 가입된 정보 또는 이미 사용 중인 이메일입니다.)") ;
@@ -33,10 +33,11 @@ const LogIn = () => {
     return (
         <div>
             <h4> Login </h4>
+            <button onClick={((e) => {
+                    e.preventDefault() ;
+                    navigate("/Auth")
+                })}> 이전 </button>
             <form onSubmit={onSubmit}>
-                <Link to="/Auth">
-                    <button> 이전 </button>
-                </Link>
                 <input type="email"
                         name="email"
                         placeholder="Email"

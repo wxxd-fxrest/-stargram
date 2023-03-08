@@ -52,7 +52,7 @@ const App = () => {
                 <Route path='/Auth' element={<Auth />} />
                 <Route path='/LogIn' element={<LogIn />} />
                 <Route path='/SignUp' element={<SignUp />} />
-                <Route path='/Dm/:uid/:DmDocID' element={<Dm />} />
+                <Route path='/Dm/:uid/:uid' element={<Dm />} />
                 <Route path='/feed/:uid/:DocID' element={<AboutFeed />} />
                 <Route path='/Profile/:displayName/:uid' element={<AboutProfile />} />
               </Route>

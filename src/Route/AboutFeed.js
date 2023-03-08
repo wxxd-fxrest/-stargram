@@ -69,9 +69,10 @@ const AboutFeed = () => {
 
     return (
         <div>
-            <Link to="/">
-                <button> 이전 </button>
-            </Link>
+            <button onClick={((e) => {
+                    e.preventDefault() ;
+                    navigate("/")
+            })}> 이전 </button>
             {feed ? 
             <div>
                 <img src={userData.attachmentUrl} width="30px" height="30px" /> 

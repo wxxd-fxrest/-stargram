@@ -85,10 +85,11 @@ const Write = ({userInfo}) => {
 
     return(
         <div>
+            <button onClick={((e) => {
+                e.preventDefault() ;
+                navigate("/")
+            })}> 이전 </button>
             <form onSubmit={onSubmit}>
-                <Link to="/">
-                    <button> 이전 </button>
-                </Link>
                 <h4> Write </h4>
                 {next ? 
                 <div> 

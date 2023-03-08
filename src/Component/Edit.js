@@ -80,9 +80,10 @@ const Edit = () => {
     return (
         <div>
             <h3> edit </h3>
-            <Link to="/">
-                <button> 이전 </button>
-            </Link>
+            <button onClick={((e) => {
+                    e.preventDefault() ;
+                    navigate("/")
+                })}> 이전 </button>
             <form onSubmit={onSubmit}>
                 {attachment ? 
                 <>

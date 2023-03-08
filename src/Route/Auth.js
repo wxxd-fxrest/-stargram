@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
+    const navigate = useNavigate();
+
     return (
         <div>
             <h4> Auth </h4>
-            <Link to="/LogIn">
-                <button> Log In </button>
-            </Link>
-            <Link to="/SignUp">
-                <button> Sign Up </button>
-            </Link>
+                <button onClick={((e) => {
+                    e.preventDefault();
+                    navigate(`/Login`);
+                })}> Log In </button>
+
+                <button onClick={((e) => {
+                    e.preventDefault();
+                    navigate(`/SignUp`);
+                })}> Sign Up </button>
         </div>
     )
 }

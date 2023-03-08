@@ -73,10 +73,11 @@ const SignUp = () => {
     return (
         <div>
             <h4> SignUp </h4>
+            <button onClick={((e) => {
+                    e.preventDefault() ;
+                    navigate("/Auth")
+                })}> 이전 </button>
             <form onSubmit={onSubmit}>
-                <Link to="/Auth">
-                    <button> 이전 </button>
-                </Link>
                 <img src={attachment} width="200px" height="200px" />
                     <input type="file"
                             style={{display:"none"}}

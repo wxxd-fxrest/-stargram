@@ -1,27 +1,27 @@
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Feed from "../Component/Feed";
 import { auth } from "../firebase";
 
 const Home = () => {
-    const onClickLogOut = () => {
-        signOut(auth)
-        alert("Log Out 완료")
-    } ;
+    const navigate = useNavigate();
 
     return (
         <div>
             <h4> Home </h4>
-            <button onClick={onClickLogOut}> Log Out </button>
-            <Link to="/Write">
-                <button> Write </button>
-            </Link>
-            <Link to="/Edit">
-                <button> Edit </button>
-            </Link>
-            <Link to="/DirectMessage">
-                <button> DirectMessage </button>
-            </Link>
+            <button onClick={(() => {
+                signOut(auth)
+                alert("Log Out 완료")
+            })}> Log Out </button>
+            
+                <button onClick={(() => {
+                    navigate("/Write")})}> Write </button>
+
+                <button onClick={(() => {
+                    navigate("/Edit")})}> Edit </button>
+
+                <button onClick={(() => {
+                    navigate("/DirectMessage")})}> DirectMessage </button>
             <Feed />
         </div>
     )

@@ -1,6 +1,6 @@
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 
@@ -10,6 +10,7 @@ const Main = ({feed}) => {
     const [feedUser, setFeedUser] = useState([]) ;
     const url = `/feed/${feed.Data.UID}/${feed.DocID}` ; 
     const profileUrl = `/Profile/${feed.Data.displayName}/${feed.Data.UID}`
+    const navigate = useNavigate();
 
     const onDelete = async() => {
         const ok = window.confirm("삭제 ㄱ?")
@@ -30,6 +31,11 @@ const Main = ({feed}) => {
         getLoginUser()
     }, []) ;
 
+    // const onClick = (e) => {
+    //     e.preventDefault()
+    //     navigate(`/Profile/${feed.Data.displayName}/${feed.Data.UID}`);
+    // }
+
     // console.log(feedUser)
     // console.log(feed)
     // console.log(DocID)
@@ -41,8 +47,10 @@ const Main = ({feed}) => {
                 {feed ? 
                 <div className="Main">
                     <Link to={profileUrl}>
+                    {/* <div onClick={onClick}> */}
                         <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
                         <h6> {feedUser.displayName} </h6>
+                    {/* </div> */}
                     </Link>
                     <Link to={url}>
                         <img src={feed.Data.attachmentUrl} width="200px" height="200px" />
