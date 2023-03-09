@@ -13,6 +13,7 @@ import AboutFeed from './Route/AboutFeed';
 import AboutProfile from './Route/AboutProfile';
 import DirectMessage from './Route/DirectMessage';
 import Dm from './Component/Dm';
+import AllDirectMessage from './Route/AllDirectMessage';
 
 const App = () => {
   const {currentUser} = useContext(AuthContext) ; 
@@ -45,9 +46,9 @@ const App = () => {
                   <ProtectedRoute>
                     <Edit />
                   </ProtectedRoute> } />
-                <Route path='/DirectMessage' element={
+                <Route path='/AllDirectMessage' element={
                   <ProtectedRoute>
-                    <DirectMessage />
+                    <AllDirectMessage />
                   </ProtectedRoute> } />
                 <Route path='/Auth' element={<Auth />} />
                 <Route path='/LogIn' element={<LogIn />} />

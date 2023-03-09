@@ -8,9 +8,13 @@ import { db } from "../firebase";
 const AboutProfile = () => {
     const {currentUser} = useContext(AuthContext) ;
     const [feedUser, setFeedUser] = useState([]) ;
+    const [feedUserUID, setFeedUserUID] = useState([]) ;
 
     const [pathDmDocID, setPathDmDocID] = useState("") ; 
     const [currentDmDocID, setCurrentDmDocID] = useState("") ; 
+
+    const [getPathInfo, setGetPathInfo] = useState([]) ;
+    const [getCurrentInfo, setGetCurrentInfo] = useState([]) ; 
 
     const location = useLocation() ;
     const navigate = useNavigate();
@@ -32,9 +36,22 @@ const AboutProfile = () => {
                     DocID: doc.id, 
                     Data: doc.data(),
                 })
+                setFeedUserUID(doc.data())
             });
             setFeedUser(feedArray) ;
         });
+
+        const getPathData = query(collection(db, "Users"), where("uid", "==", `${pathUID}`));
+            const querySnapshot = await getDocs(getPathData);
+            querySnapshot.forEach((doc) => {
+                setGetPathInfo(doc.data())
+        }); 
+
+        const getCurrentData = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
+            const querySnapshot2 = await getDocs(getCurrentData);
+            querySnapshot2.forEach((doc) => {
+                setGetCurrentInfo(doc.data())
+        }); 
 
         const getPathDM = query(collection(db, "Users", `${pathUID}`, "DM"), 
             where("opponentUID", "==", `${pathUID}`));
@@ -53,9 +70,6 @@ const AboutProfile = () => {
         });
     } ;
 
-    // console.log(pathDmDocID)
-    // console.log(currentDmDocID)
-
     useEffect(() => {
         getYourFeed() ;
     }, []) ;
@@ -63,18 +77,19 @@ const AboutProfile = () => {
     const onClickDM = async() => {
         if((pathUID !== pathDmDocID) && (`${currentUser.uid}` !== currentDmDocID)) {
             await setDoc(doc(db, "Users", `${pathUID}`, "DM", `${currentUser.uid}`), {
-                opponentUID: pathUID,
+                opponentUID: currentUser.uid, 
+                opponentName: getCurrentInfo.displayName, 
             }) ;
             await setDoc(doc(db, "Users", `${currentUser.uid}`, "DM", `${pathUID}`), {
-                opponentUID: currentUser.uid, 
+                opponentUID: pathUID,
+                opponentName: getPathInfo.displayName, 
             })
         } 
     }
 
-
     // console.log("pathDmDocID => ", pathDmDocID)
     // console.log("currentDmDocID => ", currentDmDocID)
-    // console.log(feedUser)
+    // console.log(feedUser) ;
     // console.log(dmDocID) 
     // console.log("pathUID => ", pathDmDocID) ; //8zKekI0LDPg11gJLgk82irMSrZf1 >> 상대방 
     // console.log("currentUser => ", currentDmDocID) ; //j8AKBlYVmtTV3pAJ7QR69dJRPEj2 >> login user
@@ -82,11 +97,14 @@ const AboutProfile = () => {
     return (
         <div>
             <button onClick={(() => {
-                    navigate("/")})}> 이전 </button>
+                navigate("/")})}> 이전 </button>
             <form onSubmit={((e) => {e.preventDefault()})}>
-                <Link to={DmUrl}>
-                    <span onClick={onClickDM}> DM </span>
-                </Link>
+                {feedUserUID.UID == currentUser.uid ? null : 
+                <div>
+                    <Link to={DmUrl}>
+                        <span onClick={onClickDM}> DM </span>
+                    </Link>
+                </div>}
                 <p> {pathName} </p>
                 {feedUser.map((f, ID) => (
                     <div key={ID}>
@@ -99,32 +117,3 @@ const AboutProfile = () => {
 }
 
 export default AboutProfile ; 
-
-
-
-
-  // useEffect(() => {
-    //     let DocID = `${pathUID, currentUser.uid}`
-    //     const aa = async () => {
-    //         const DirectMessage = query(collection(db, 'DM'), 
-    //             where("UID", "==", `${DocID}`))
-    //         const querySnapshot = await getDocs(DirectMessage);
-    //         querySnapshot.forEach((doc) => {
-    //             setDmDocID(doc.id)
-    //         }); 
-    //     }
-    //     return() => {
-    //         aa()
-    //     }
-    // }) ; 
-
-    // const onClickDM = async() => {
-    //     if(!dmDocID) {
-    //         await addDoc(collection(db, "DM"), {
-    //             UID: [pathUID, currentUser.uid]
-    //         }) ;
-    //     }
-    //     if(dmDocID) {
-    //         navigate(`/Dm/${pathUID}/${dmDocID}`) ;
-    //     }
-    // } ; 

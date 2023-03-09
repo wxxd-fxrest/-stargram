@@ -11,7 +11,7 @@ const Dm = () => {
     const [pathUserInfo, setPathUserInfo] = useState([]) ; 
     const [currentUserInfo, setCurrentUserInfo] = useState([]) ; 
     const [loginMessage, setLoginMessage] = useState([]) ; 
-    const [pathtMessage, setPathtMessage] = useState([]) ; 
+    // const [pathtMessage, setPathtMessage] = useState([]) ; 
     const location = useLocation() ;
     const navigate = useNavigate();
 
@@ -35,29 +35,30 @@ const Dm = () => {
             let feedArray = []
             querySnapshot.forEach((doc) => {
                 feedArray.push({
-                    DocID: doc.id, 
                     Data: doc.data(), 
                 })
             });
             setLoginMessage(feedArray)
         });
 
-        const pathMessage = query(collection(db, "Users", `${pathUID}`, "DM", `${currentUID}`, "DirectMessage"), 
-            orderBy("date", "asc"));
-        onSnapshot(pathMessage, (querySnapshot) => {
-            let feedArray = []
-            querySnapshot.forEach((doc) => {
-                feedArray.push({
-                    DocID: doc.id, 
-                    Data: doc.data(), 
-                })
-            });
-            setPathtMessage(feedArray)
-        });
+        // const pathMessage = query(collection(db, "Users", `${pathUID}`, "DM", `${currentUID}`, "DirectMessage"), 
+        //     orderBy("date", "asc"));
+        // onSnapshot(pathMessage, (querySnapshot) => {
+        //     let feedArray = []
+        //     querySnapshot.forEach((doc) => {
+        //         feedArray.push({
+        //             Data: doc.data(), 
+        //         })
+        //     });
+        //     setPathtMessage(feedArray)
+        // });
     } ;
 
-    console.log(pathUserInfo)
-    console.log(currentUserInfo)
+    // console.log(loginMessage)
+    // console.log(pathtMessage)
+
+    // console.log(pathUserInfo)
+    // console.log(currentUserInfo)
 
     useEffect(() => {
         getPathInfo()
@@ -66,7 +67,6 @@ const Dm = () => {
     const onClick = async() => {
         await addDoc(collection(db, "Users", `${pathUID}`, "DM", `${currentUID}`, "DirectMessage"), {
             RecevieName : pathUserInfo.displayName, 
-            ReceiveUID : pathUID,
             SendName : currentUserInfo.displayName,
             SendUID : currentUser.uid,
             sendMessage : textarea, 
@@ -76,7 +76,6 @@ const Dm = () => {
             RecevieName : currentUserInfo.displayName,
             ReceiveUID : currentUser.uid,
             SendName : pathUserInfo.displayName, 
-            SendUID : pathUID,
             sendMessage : textarea, 
             date: Timestamp.now(),
         })
@@ -91,9 +90,12 @@ const Dm = () => {
                     navigate("/")
                 })}> 이전 </button>
             <h6> {pathUserInfo.displayName} </h6>
-
-            <DirectMessage loginMessage={loginMessage} pathtMessage={pathtMessage} pathUID={pathUID} currentUID={currentUID}/>
-
+            {loginMessage.map((m, ID) => (
+                <div key={ID}>
+                    <DirectMessage loginMessage={m} />
+                </div> 
+            ))}
+            
             <input type="textarea"
                     name="textarea"
                     placeholder="댓글"

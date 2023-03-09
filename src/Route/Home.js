@@ -21,7 +21,7 @@ const Home = () => {
                     navigate("/Edit")})}> Edit </button>
 
                 <button onClick={(() => {
-                    navigate("/DirectMessage")})}> DirectMessage </button>
+                    navigate("/AllDirectMessage")})}> AllDirectMessage </button>
             <Feed />
         </div>
     )
