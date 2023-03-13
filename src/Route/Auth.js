@@ -1,20 +1,21 @@
 import { useNavigate } from "react-router-dom";
-
+import Login from '/Users/drizzle/stargram/src/Component/LogIn.js' ;
 const Auth = () => {
     const navigate = useNavigate();
 
     return (
-        <div>
-            <h4> Auth </h4>
+        <div className="Auth">
+            <div className="Auth-Login">
+                <h4> Instagram </h4>
+                <Login />
+            </div>
+            <div className="Auth-SignUp">
+                <h4> 계정이 없으신가요? </h4>
                 <button onClick={((e) => {
-                    e.preventDefault();
-                    navigate(`/Login`);
-                })}> Log In </button>
-
-                <button onClick={((e) => {
-                    e.preventDefault();
-                    navigate(`/SignUp`);
-                })}> Sign Up </button>
+                        e.preventDefault();
+                        navigate(`/SignUp`);
+                    })}> 가입하기 </button>
+            </div>
         </div>
     )
 }

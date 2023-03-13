@@ -4,7 +4,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
-import Attach from '/Users/drizzle/stargram/src/img/attach.png'
+import Attach from '/Users/drizzle/stargram/src/img/instagram_sellectIMG.png'
 import { addDoc, collection, getDocs, query, Timestamp, where } from "firebase/firestore";
 
 const Write = ({userInfo}) => {
@@ -56,14 +56,6 @@ const Write = ({userInfo}) => {
         navigate("/");
     } ;
 
-    const onClickNext = () => {
-        if (attachment) {
-            setNext(true) 
-        } else if(!attachment) {
-            alert("사진을 선택해주세요.")
-        }
-    }
-
     const onChange = (event) => {
         const {target : {value}} = event ; 
         setMessageText(value) ; 
@@ -84,34 +76,43 @@ const Write = ({userInfo}) => {
     } ; 
 
     return(
-        <div>
+        <div className="Write">
             <button onClick={((e) => {
                 e.preventDefault() ;
-                navigate("/")
-            })}> 이전 </button>
-            <form onSubmit={onSubmit}>
+                navigate("/")})}> 이전 </button>
+            <form onSubmit={onSubmit} className="Write_form">
                 <h4> Write </h4>
-                {next ? 
-                <div> 
-                    <img src={attachment} width="200px" height="200px" />
+                {/* <img src={attachment} /> */}
+                <div className="Write_form_input">
                     <input type="textarea" 
                             placeholder="message..."
                             value={messageText || ''}
-                            onChange={onChange}/>
-                    <input type="submit" value="OK"/> 
-                </div> :
-                <div>
-                    <img src={attachment} width="500px" height="500px" />
+                            onChange={onChange} 
+                            className="Write_form_input_textarea"/>
+                    <input type="submit" value="OK" className="Write_form_input_OK"/> 
+                </div>
+                {attachment ? 
+                <>
+                    <input type="file"
+                        style={{display:"none"}}
+                        id="inputFile"
+                        onChange={onFileChange}
+                        required />
+                    <label htmlFor="inputFile" className="Write_attach_label_sellect">
+                        <img src={attachment} alt="" />
+                    </label>
+                </> : <>
                     <input type="file"
                             style={{display:"none"}}
                             id="inputFile"
                             onChange={onFileChange}
                             required />
-                    <label htmlFor="inputFile">
+                    <label htmlFor="inputFile" className="Write_attach_label">
                         <img src={Attach} alt="" />
+                        <h4> 이미지를 선택해주세요. </h4>
                     </label>
-                    <button onClick={onClickNext}> 다음 </button>
-                </div> }
+                </>}
+
             </form>
         </div>
     )

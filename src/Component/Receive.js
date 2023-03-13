@@ -18,15 +18,22 @@ const Receive = ({coment, pathDocID}) => {
     return (
         <div>
             {coment ? 
-            <>
-                <h6> {coment.Data.SendName} </h6>
-                <img src={coment.Data.SendPhotoURL} width="30px" height="30px" /> 
-                <h4> {coment.Data.Coment} </h4>
+            <div className="Receive">
+                <div className="Receive_Profile">
+                    <img src={coment.Data.SendPhotoURL} width="30px" height="30px" /> 
+                    <h6> {coment.Data.SendName} </h6>
+                    <div className="Receive_Coment">
+                        <h4> {coment.Data.Coment} </h4>
+                    </div>
+                </div>
                 {currentUser.uid == coment.Data.SendUID ? 
                     <div>
-                        <button onClick={onDelete}> coment 삭제 </button>
+                        <button onClick={onDelete} id="Receive_Delete_X" style={{display: "none"}}> X </button>
                     </div> : null}
-            </> : null}
+                    <label htmlFor="Receive_Delete_X" className="Receive_Delete">
+                        <h3 className="Receive_Delete_label"> X </h3>
+                    </label>
+            </div> : null}
         </div>
     )
 }

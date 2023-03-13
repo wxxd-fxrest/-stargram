@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import Coment from "../Component/Coment";
-
+import Delete from '/Users/drizzle/stargram/src/img/instagram_delete.png' ; 
 
 const Profile = ({feed, userData}) => {
     const {currentUser} = useContext(AuthContext) ;
@@ -42,16 +42,24 @@ const Profile = ({feed, userData}) => {
             {currentUser.uid === feed.Data.UID ?
             <div>
             {feed ? 
-                <div className="Main">
-                    <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
-                    <h6> {feed.Data.displayName} </h6>
-                    <img src={feed.Data.attachmentUrl} width="200px" height="200px" 
+                <div className="Profile">
+                    <div className="Profile_Profile">
+                        <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
+                        <h6> {feed.Data.displayName} </h6>
+                    </div>
+                    <img src={feed.Data.attachmentUrl}
                         onClick={(() => {
                             navigate(`/feed/${feed.Data.UID}/${feed.DocID}`)
                         })}/>
-                    <h5> {feed.Data.message} </h5>
-                    <Coment feed={feed}/>
-                    <button onClick={onDelete}> 삭제 </button>
+                    <div className="Profile_Write">
+                        <h6> {feed.Data.displayName} </h6>
+                        <h5> {feed.Data.message} </h5>
+                    </div>
+                    {/* <Coment feed={feed}/> */}
+                    <button onClick={onDelete} id="DeleteImg" style={{display:"none"}}> 삭제 </button>
+                    <label htmlFor="DeleteImg">
+                        <img src={Delete} className="Profile_Delete"/>
+                    </label>
                 </div> : null }
             </div> : null}
         </div>

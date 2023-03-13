@@ -1,48 +1,888 @@
-.App {
+html {
+  /* background-color: cadetblue; */
+  text-align: center;
+  height: 100vh;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  display: inline-flex;
+  max-width: 700px;
+  min-width: 700px;
+  width: 700px;
+  /* height: 100vh; */
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.Auth {
+  background-color: #ffffff;
+  display: inline-flex;
+  width: 400px;
+  /* height: 100vh; */
+  /* min-height: 100vh; */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Auth-Login {
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  display: flex;
+  height: 400px;
+  width: 400px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Auth-Login > h4 {
+  display: flex;
+  font-family: "Lobster", cursive;
+  font-size: 40px;
+  margin: 15px 0px 30px 0px;
+}
+
+.Auth-SignUp {
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  width: 400px;
+  height: 60px;
+  margin: 10px 0px 0px 0px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Auth-SignUp > h4 { 
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 20px 0px 20px 0px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Auth-SignUp > button {
+  border: none;
+  margin-left: 5px;
+  font-weight: 600;
+  color: rgb(0, 128, 255);
+  background-color: white;
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ------------------------------------ */
+
+.Login {
+  width: 350px;
+  height: 250px;
+}
+
+.Login > form > input {
+  background-color: rgb(252, 252, 252);
+  border: solid 1px rgb(171, 171, 171);
+  border-radius: 5px;
+  width: 300px;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.Login > form > button {
+  background-color: rgb(75, 162, 255, 0.8);
+  border: none;
+  border-radius: 10px;
+  width: 310px;
+  height: 30px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ------------------------------------ */
+
+.SignUp {
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  background-color: #ffffff;
+  width: 400px;
+  height: 600px;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.SignUp > h4 {
+  display: flex;
+  font-family: "Lobster", cursive;
+  font-size: 40px;
+  margin: 15px 0px 30px 0px;
+}
+
+.SignUp-back {
+  width: 100%;
+  display: inline-flex;
+}
+
+.SignUp-back > button {
+  background-color: rgb(75, 162, 255, 0.8);
+  margin-left: 40px;
+  border: none;
+  border-radius: 10px;
+  width: 40px;
+  height: 20px;
+  color: white;
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.SignUp > form {
+  display: inline-flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.SignUp > form > div {
+  position: relative;
+}
+
+.profile-sellect > img {
+  border-radius: 100%;
+  border: solid 1px black;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.profile-sellect > p {
+  font-size: 12px;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.SignUp > form > div > label {
+  background-color: aqua;
+  position: absolute;
+  left: 150px;
+  top: 0px;
+  width: 100px;
+  height: 100px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.SignUp > form > input {
+  background-color: rgb(252, 252, 252);
+  border: solid 1px rgb(171, 171, 171);
+  border-radius: 5px;
+  width: 300px;
+  height: 30px;
+  margin-top: 5px;
+}
+
+.SignUp > form > button {
+  background-color: rgb(75, 162, 255, 0.8);
+  border: none;
+  border-radius: 10px;
+  width: 310px;
+  height: 30px;
+  color: white;
+  font-weight: 500;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+/* ------------------------------------ */
+
+.Home {
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  border-radius: 10px;
+  /* background-color: #d7e58b; */
+  flex-direction: column;
+  max-width: 700px;
+  min-width: 700px;
+  overflow: scroll;
+}
+
+.Home-Instagram {
+  border-bottom: solid 1px rgba(140, 140, 140, 0.4);
+  position: relative;
+}
+
+.Home-Instagram > h4 {
+  /* background-color: aquamarine; */
+  font-family: "Lobster", cursive;
+  font-size: 40px;
+  margin: 5px 0px 10px 0px;
+}
+
+.Home-Instagram > img {
+  width: 50px;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.Btn-All {
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  position: absolute;
+  right: 0px;
+}
+
+.Btn-All > div {
+  z-index: 1;
+  position: absolute;
+  background-color: white;
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  width: 100px;
+  right: 10px;
+  top: -30px;
+  padding: 10px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.Btn-All > div > button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  color: #383838;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* ------------------------------------ */
+
+.Feed {
+  /* background-color: #7e8842; */
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+  position: relative;
+  width: 500px;
+  height: 700px;
+  margin-top: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+.Feed_span {
+  position: absolute;
+  border: solid 1px black;
+  border-radius: 20px;
+  width: 100px;
+  height: 25px;
+  right: -89px;
+  top: -20px;
+  padding-top: 6px;
+  cursor: pointer;
 }
 
-.Main {
-  background-color: #f1ff99;
-  margin: 20px;
+.Feed_span:hover {
+  background-color: rgb(0, 128, 255, 0.4);
 }
 
-.Profile {
-  background-color: #232808;
+
+/* ------------------------------------ */
+
+.Main, .Profile {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 450px;
+  margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Main_profile, .Profile_Profile {
+  display: flex;
+  border-top: solid 1px rgba(140, 140, 140, 0.4);
+  border-bottom: solid 1px rgba(140, 140, 140, 0.4);
+  /* background-color: cadetblue; */
 }
 
+.Main_profile > img, .Profile_Profile > img {
+  display: flex;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.Main_profile > h6, .Profile_Profile > h6 {
+  font-size: 15px;
+  margin: 25px 0px 0px 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.Main > img, .Profile > img { 
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.Main_delete {
+  position: absolute;
+  width: 30px;
+  top: 20px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.Profile_Delete {
+  position: absolute;
+  width: 30px;
+  top: 20px;
+  right: 10px;
+}
+
+.Main_write, .Profile_Write {
+  /* background-color: #dae696; */
+  display: flex;
+}
+
+.Main_write > h6, .Profile_Write > h6 {
+  /* background-color: #c9eb0c; */
+  display: inline-flex;
+  margin: 10px 10px 10px 10px; 
+  font-size: 14px;
+}
+
+.Main_write > h5, .Profile_Write > h5 {
+  /* background-color: #748707; */
+  display: inline-flex;
+  margin: 10px 10px 10px 0px; 
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ------------------------------------ */
+
+.AboutProfile {
+  /* background-color: wheat; */
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  border-radius: 10px;
+  flex-direction: column;
+  display: flex;
+  position: relative;
+  width: 460px;
+  height: 700px;
+  overflow: scroll;
+  margin-bottom: 10px;
+}
+
+.AboutProfile > button {
+  position: absolute;
+  border: none;
+  background-color: white;
+  left: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.AboutProfile_DM {
+  border: solid 1px #383838;
+  border-radius: 5px;
+  position: absolute;
+  display: inline-block;
+  right: 270px;
+  top: 85px;
+  width: 80px;
+  height: 18px;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 3px;
+  z-index: 1;
+  color: #383838;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.AboutProfile_form {
+  padding: 10px;
+}
+
+.AboutProfile_Profile {
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  width: 100%;
+  height: 100px;
+  border-bottom: solid 1px rgba(140, 140, 140, 0.4);
+}
+
+.AboutProfile_Profile > img {
+  position: absolute;
+  border-radius: 100%;
+  top: 10px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+}
+
+.AboutProfile_Profile > p {
+  position: absolute;
+  top: -3px;
+  left: 100px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #383838;
+}
+
+.AboutProfile_Props {
+  background-color: #904747;
+  float: left;
+  margin: 0px 5px 10px 5px;
+}
+
+/* ------------------------------------ */
+
+.YourProfile_goFeed {
+  width: 100px;
+  height: 100px;
+}
+
+.YourProfile_goFeed > img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+/* ------------------------------------ */
+
+.AboutFeed {
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  border-radius: 10px;
+  padding: 10px;
+  display: inline-flex;
+  margin-bottom: 10px;
+  text-align: start;
+  position: relative;
+}
+
+.AboutFeed > div {
+  display: inline-block;
+}
+
+.AboutFeed > button {
+  position: absolute;
+  border: none;
+  background-color: white;
+  right: 10px;
+  top: 29px;
+  cursor: pointer;
+}
+
+.AboutFeed_Profile {
+  display: flex;
+  border-bottom: solid 1px rgba(140, 140, 140, 0.4);
+  padding: 10px;
+}
+
+.AboutFeed_Profile > img {
+  border-radius: 100%;
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.AboutFeed_Profile > p {
+  display: inline-flex;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 20px 0px 10px 10px;
+  cursor: pointer;
+}
+
+.AboutFeed_Feed {
+  display: inline-flex;
+  position: relative;
+}
+
+.AboutFeed_Feed > button {
+  position: absolute;
+}
+
+.AboutFeed_Feed > img {
+  /* display: inline-flex;
+  float: left; */
+  margin: 5px 0px 5px 5px;
+  border-radius: 5px;
+  width: 200px;
+  max-width: 200px;
+  min-width: 200px; 
+}
+
+.AboutFeed_delete {
+  position: absolute;
+  width: 23px;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.AboutFeed_Write {
+  margin-top: 0px;
+}
+
+.AboutFeed_Write > h3 {
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 10px 0px 0px 10px;
+}
+
+.AboutFeed_Write > p {
+  width: 300px;
+  margin: 5px 10px 5px 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.AboutFeed_Input {
+  display: inline-flex;
+  border-top: solid 1px rgba(140, 140, 140, 0.4);
+  width: 100%;
+  height: 50px;
+}
+
+.AboutFeed_Input > input {
+  display: inline-flex;
+  width: 100%;
+  border: none;
+}
+
+.AboutFeed_Input > button {
+  background-color: white;
+  border: none;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+/* ------------------------------------ */
+
+.Coment {
+  overflow: scroll;
+  height: 300px;
+  border-top: solid 1px rgba(140, 140, 140, 0.4);
+}
+
+.Receive_Profile {
+  display: inline-flex;
+  width: 490px;
+}
+
+.Receive_Profile > img {
+  border-radius: 100%;
+  display: inline-flex;
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.Receive_Profile > h6 {
+  display: inline-block;
+  margin: 17px 0px 20px 5px;
+  padding-right: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  border-right: solid 1px  rgba(140, 140, 140, 0.4);
+}
+
+.Receive_Coment > h4 {
+  display: inline-block;
+  width: 400px;
+  margin: 17px 0px 20px 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.Receive_Delete {
+  background-color: cadetblue;
+  position: relative;
+}
+
+.Receive_Delete > h3 {
+  display: inline-flex;
+  position: absolute;
+  color: black;
+  top: -50px;
+  left: 500px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.Receive_Delete_label > h3 {
+  border: none;
+  top: -70px;
+  right: 10px;
+}
+
+/* ------------------------------------ */
+
+.DM {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  text-align: start;
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 460px;
+  height: 700px;
+}
+.DM_back {
+  height: 50px;
+  border-bottom: solid 1px rgba(140, 140, 140, 0.4);
+}
+
+.DM_back > p {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 12px 0px 20px 15px;
+}
+
+.DM_back > button {
+  position: absolute;
+  border: none;
+  background-color: white;
+  right: 10px;
+  top: 25px;
+}
+
+.DM_v {
+  overflow-y: scroll;
+  border-bottom: solid 1px rgba(140, 140, 140, 0.4);
+  height: 700px;
+}
+
+.DM_input {
+  display: inline-flex;
+  width: 460px;
+  height: 50px;
+}
+
+.DM_input > input {
+  background-color: #ffffff;
+  border: none;
+  width: 100%;
+  padding-top: 10px;
+  display: inline-flex;
+  outline: none;
+}
+
+.DM_input > button {
+  border: none;
+  background-color: #ffffff;
+  display: inline-flex;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+/* ------------------------------------ */
+
+.DirectMessage {
+  overflow-y: scroll;
+  padding: 0px 10px 5px 10px;
+  margin: 0px;
+}
+
+.DirectMessage > div > h3 {
+  margin: 5px 5px 5px 5px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.Dm_your {
+  background-color: steelblue;
+  border-radius: 17px 17px 17px 5px;   
+  padding: 5px;
+  float: left;
+  margin-bottom: 0px;
+  max-width: 300px;
+}
+
+.Dm_your > h6 {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0px;
+  padding: 5px;
+  max-width: max-content;
+  word-break: break-all;
+}
+
+.Dm_mine {
+  background-color: tomato;
+  max-width: max-content;
+  border-radius: 17px 17px 5px 17px;   
+  padding: 5px;
+  float: right;
+  margin-top: 3px;
+}
+
+.Dm_mine > h6 {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0px;
+  padding: 5px;
+  max-width: max-content;
+  word-break: break-all;
+}
+
+/* ------------------------------------ */
+
+.AllDirectMessage {
+  /* background-color: wheat; */
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  text-align: start;
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 460px;
+  height: 700px;
+}
+
+.AllDirectMessage > h4 {
+  /* background-color: #383838; */
+  display: flex;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 15px 10px 15px 10px;
+  margin: 0px 0px 10px 0px;
+  border-bottom: solid 1px rgba(140, 140, 140, 0.4);
+}
+
+.AllDirectMessage > button {
+  background-color: white;
+  position: absolute;
+  border: none;
+  right: 10px;
+  top: 25px;
+  cursor: pointer;
+}
+
+.AllDirectMessage_II {
+  display: inline-flex;
+  flex-direction: column;
+  height: 700px;
+  overflow: scroll;
+}
+
+.AllDirectMessage_Name {
+  height: 40px;
+}
+
+.AllDirectMessage_Name > h4 {
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px;
+}
+
+.AllDirectMessage_Name > h4:hover {
+  background-color: rgb(0, 128, 255, 0.4);
+  cursor: pointer;
+}
+
+.AllDirectMessage_Name > p {
+  opacity: 0;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* ------------------------------------ */
+
+.Write {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  /* text-align: start; */
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.Write > button {
+  position: absolute;
+  right: 10px;
+  top: 25px;
+  border: none;
+  background-color: white;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.Write_form {
+  flex-direction: column;
+  display: inline-flex;
+  width: 460px;
+  height: 700px;
+  position: relative;
+}
+
+.Write_form > h4 {
+  display: flex;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 15px 10px 15px 10px;
+  margin: 0px 0px 10px 0px;
+  border-bottom: solid 1px rgba(140, 140, 140, 0.4);
+}
+
+.Write_attach_label_sellect > img {
+  display: inline-flex;
+  width: 460px;
+  max-height: 580px;
+  border-radius: 10px;
+}
+
+.Write_form_input {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.Write_form_input_textarea {
+  height: 100%;
+  width: 90%;
+  display: inline-flex;
+  background-color: white;
+  border: none;
+}
+
+.Write_form_input_OK {
+  height: 100%;
+  display: inline-flex;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+.Write_attach_label {
+  border: solid 1px rgba(140, 140, 140, 0.4);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.Write_attach_label > h4 {
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+.Write_attach_label > img {
+  /* background-color: #383838; */
+  margin-bottom: 25px;
+  width: 300px;
+  opacity: 0.7;
+}

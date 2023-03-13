@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
+import Delete from '/Users/drizzle/stargram/src/img/instagram_delete.png' ; 
 
 const Main = ({feed}) => {
     const {currentUser} = useContext(AuthContext) ; 
@@ -31,10 +32,15 @@ const Main = ({feed}) => {
         getLoginUser()
     }, []) ;
 
-    // const onClick = (e) => {
-    //     e.preventDefault()
-    //     navigate(`/Profile/${feed.Data.displayName}/${feed.Data.UID}`);
-    // }
+    const onProfileClick = (e) => {
+        e.preventDefault()
+        navigate(`/Profile/${feed.Data.displayName}/${feed.Data.UID}`);
+    }
+
+    const onFeedClick = (e) => {
+        e.preventDefault()
+        navigate(`/feed/${feed.Data.UID}/${feed.DocID}`);
+    }
 
     // console.log(feedUser)
     // console.log(feed)
@@ -46,18 +52,24 @@ const Main = ({feed}) => {
             <div>
                 {feed ? 
                 <div className="Main">
-                    <Link to={profileUrl}>
-                    {/* <div onClick={onClick}> */}
+                    <div onClick={onProfileClick} className="Main_profile">
                         <img src={feedUser.attachmentUrl} width="30px" height="30px" /> 
                         <h6> {feedUser.displayName} </h6>
-                    {/* </div> */}
-                    </Link>
-                    <Link to={url}>
-                        <img src={feed.Data.attachmentUrl} width="200px" height="200px" />
-                    </Link>
-                    <h5> {feed.Data.message} </h5>
+                    </div>
+                    <img src={feed.Data.attachmentUrl} 
+                        onClick={onFeedClick}/>
+
                     {feed.Data.UID == currentUser.uid ? 
-                        <button onClick={onDelete}> 삭제 </button> : null}
+                        <div>
+                            <button onClick={onDelete} id="DeleteImg" style={{display:"none"}}> 삭제 </button> 
+                            <label htmlFor="DeleteImg">
+                                <img src={Delete} className="Main_delete"/>
+                            </label> 
+                        </div> : null}
+                    <div className="Main_write">
+                        <h6> {feedUser.displayName} </h6>
+                        <h5> {feed.Data.message} </h5>
+                    </div>
                 </div> : null } 
             </div>
         </form>

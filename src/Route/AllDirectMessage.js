@@ -30,11 +30,11 @@ const AllDirectMessage = () => {
             arr.push (
                 <div key={i}>
                     {dmDoc[i] && 
-                        <div style={{backgroundColor:"skyblue"}}
+                        <div className="AllDirectMessage_Name"
                             onClick={(() => { 
                                 navigate(`/Dm/${dmDoc[i].DocID}/${currentUser.uid}`)
                             })}>
-                            <p>{dmDoc[i].Data.opponentName}</p>
+                            <h4>{dmDoc[i].Data.opponentName}</h4>
                             <p>{dmDoc[i].DocID}</p>
                         </div>}
                 </div>
@@ -47,11 +47,13 @@ const AllDirectMessage = () => {
     }, []) ;
 
     return (
-        <div>
-            <h4>AllDirectMessage</h4>
+        <div className="AllDirectMessage">
+            <h4> Direct Message </h4>
             <button onClick={(() => {
                 navigate("/")})}> 이전 </button>
-            {ii()}
+            <div className="AllDirectMessage_II">
+                {ii()}
+            </div>
         </div>
     )
 }

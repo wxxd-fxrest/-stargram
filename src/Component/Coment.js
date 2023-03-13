@@ -30,7 +30,7 @@ const Coment = ({pathDocID}) => {
     // console.log(coment)
 
     return (
-        <div>
+        <div className="Coment">
             {coment.map((c, ID) => (
                 <div key={ID}>
                     <Receive coment={c} pathDocID={pathDocID} />

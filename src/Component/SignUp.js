@@ -6,6 +6,7 @@ import { auth, db, storage } from "../firebase.js";
 import { getDownloadURL, uploadBytes, uploadString, ref } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import Attach from '/Users/drizzle/stargram/src/img/attach.png'
+import Profile from '/Users/drizzle/stargram/src/img/profile.jpg' ; 
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -71,14 +72,22 @@ const SignUp = () => {
     }
 
     return (
-        <div>
-            <h4> SignUp </h4>
-            <button onClick={((e) => {
-                    e.preventDefault() ;
-                    navigate("/Auth")
-                })}> 이전 </button>
+        <div className="SignUp">
+            <h4> Instagram </h4>
+            <div className="SignUp-back">
+                <button onClick={((e) => {
+                        e.preventDefault() ;
+                        navigate("/Auth")
+                    })}> 이전 </button>
+            </div>
             <form onSubmit={onSubmit}>
-                <img src={attachment} width="200px" height="200px" />
+                <div className="profile-sellect">
+                    {attachment ? 
+                    <img src={attachment} /> : 
+                    <div className="profile-sellect">
+                        <img src={Profile} /> 
+                        <p> 프로필 사진을 선택해주세요. </p>
+                    </div>}
                     <input type="file"
                             style={{display:"none"}}
                             id="inputFile"
@@ -87,8 +96,7 @@ const SignUp = () => {
                     <label htmlFor="inputFile">
                         <img src={Attach} alt="" />
                     </label>
-                    <input type="submit" value="OK"/> 
-
+                </div>
                 <input type="text"
                         name="displayName"
                         placeholder="Display name"

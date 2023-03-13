@@ -86,8 +86,8 @@ const AboutProfile = () => {
             })
         } 
     }
-
-    // console.log("pathDmDocID => ", pathDmDocID)
+    // console.log(getPathInfo)
+    // console.log("pathDmDocID => ", pathDmDocID) ;
     // console.log("currentDmDocID => ", currentDmDocID)
     // console.log(feedUser) ;
     // console.log(dmDocID) 
@@ -95,19 +95,22 @@ const AboutProfile = () => {
     // console.log("currentUser => ", currentDmDocID) ; //j8AKBlYVmtTV3pAJ7QR69dJRPEj2 >> login user
 
     return (
-        <div>
+        <div className="AboutProfile">
             <button onClick={(() => {
                 navigate("/")})}> 이전 </button>
-            <form onSubmit={((e) => {e.preventDefault()})}>
+            <form onSubmit={((e) => {e.preventDefault()})} className="AboutProfile_form">
                 {feedUserUID.UID == currentUser.uid ? null : 
-                <div>
-                    <Link to={DmUrl}>
-                        <span onClick={onClickDM}> DM </span>
+                <div className="AboutProfile_DM_Div">
+                    <Link to={DmUrl} className="AboutProfile_DM">
+                        <span onClick={onClickDM} > DM 보내기 </span>
                     </Link>
                 </div>}
-                <p> {pathName} </p>
+                <div className="AboutProfile_Profile">
+                    <img src={getPathInfo.attachmentUrl} />
+                    <p> {pathName} </p>
+                </div>
                 {feedUser.map((f, ID) => (
-                    <div key={ID}>
+                    <div key={ID} className="AboutProfile_Props">
                         <YourProfile feedUser={f} pathUID={pathUID} />             
                     </div>
                 ))}

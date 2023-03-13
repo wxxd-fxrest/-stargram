@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Coment from "../Component/Coment";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
+import Delete from '/Users/drizzle/stargram/src/img/instagram_delete.png' ; 
 
 const AboutFeed = () => {
     const {currentUser} = useContext(AuthContext) ;
@@ -68,22 +69,37 @@ const AboutFeed = () => {
     // console.log("pathDocID => ", pathDocID, "pathUID => ", pathUID)
 
     return (
-        <div>
+        <div className="AboutFeed">
             <button onClick={((e) => {
                     e.preventDefault() ;
                     navigate("/")
             })}> 이전 </button>
             {feed ? 
             <div>
-                <img src={userData.attachmentUrl} width="30px" height="30px" /> 
-                <p> {userData.displayName} </p>
-                <div>
-                    <img src={feed.attachmentUrl} width="300px" height="300px" /> 
-                    <p> {feed.message} </p>
-                    {pathUID == currentUser.uid && <button onClick={onDelete}> 삭제 </button> }
+                <div className="AboutFeed_Profile" 
+                    onClick={(() => {navigate(`/Profile/${feed.displayName}/${feed.UID}`)})}>
+                    <img src={userData.attachmentUrl} /> 
+                    <p> {userData.displayName} </p>
                 </div>
-                <Coment feed={feed} pathDocID={pathDocID}/>
-                <div>
+                <div className="AboutFeed_Feed">
+                    <img src={feed.attachmentUrl} /> 
+                    <div className="AboutFeed_Write">
+                        <h3> {feed.displayName} </h3>
+                        <p> {feed.message} </p>
+                    </div>
+                    {pathUID == currentUser.uid && 
+                    <>
+                        <button onClick={onDelete} id="DeleteImg" style={{display:"none"}}> 
+                            삭제 
+                        </button> 
+                        <label htmlFor="DeleteImg">
+                            <img src={Delete} className="AboutFeed_delete"/>
+                        </label>
+                    </>}
+                </div>
+
+                    <Coment feed={feed} pathDocID={pathDocID}/>
+                <div className="AboutFeed_Input">
                     <input type="textarea"
                             name="textarea"
                             placeholder="댓글"

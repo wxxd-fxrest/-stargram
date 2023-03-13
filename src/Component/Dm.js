@@ -83,29 +83,34 @@ const Dm = () => {
     } ;
 
     return (
-        <div>
-            <p> DirectMessage </p>
-            <button onClick={((e) => {
-                    e.preventDefault() ;
-                    navigate("/")
-                })}> 이전 </button>
-            <h6> {pathUserInfo.displayName} </h6>
-            {loginMessage.map((m, ID) => (
-                <div key={ID}>
-                    <DirectMessage loginMessage={m} />
-                </div> 
-            ))}
-            
-            <input type="textarea"
-                    name="textarea"
-                    placeholder="댓글"
-                    required 
-                    value={textarea}
-                    onChange={(e) => {
-                        const {target : {value}} = e ; 
-                        setTextarea(value) ;
-                    }} />
-            <button onClick={onClick}> OK </button>
+        <div className="DM">
+            <div className="DM_back">
+                {/* <p> Direct Message </p> */}
+                <p> {pathUserInfo.displayName} </p>
+                <button onClick={((e) => {
+                        e.preventDefault() ;
+                        navigate("/")
+                    })}> 이전 </button>
+            </div>
+            <div className="DM_v">
+                {loginMessage.map((m, ID) => (
+                    <div key={ID} className="Dm_props">
+                        <DirectMessage loginMessage={m}/>
+                    </div> 
+                ))}
+            </div>
+            <div className="DM_input">
+                <input type="textarea"
+                        name="textarea"
+                        placeholder="댓글"
+                        required 
+                        value={textarea}
+                        onChange={(e) => {
+                            const {target : {value}} = e ; 
+                            setTextarea(value) ;
+                        }} />
+                <button onClick={onClick}> OK </button>
+            </div>
         </div>
     )
 }

@@ -38,12 +38,15 @@ const Feed = () => {
     const toggleAccount = () => setProfile((prev) => !prev) ;
 
     return (
-        <div>
-            <span onClick={toggleAccount}> 
-                  {profile ? "Main" : "Profile"} 
-            </span>
-            {profile ? <h1>profile</h1> : <h1> main </h1>}
-            <h3> {userData.displayName} </h3>
+        <div className="Feed">
+            <div className="Feed_span">
+            {profile ? 
+                <span onClick={toggleAccount}> 
+                    Home
+                </span> : <span onClick={toggleAccount}> 
+                    {userData.displayName}
+                </span>}
+            </div>
             {feed.map((f, ID) => (
                 <div key={ID}>
                     {profile ? 

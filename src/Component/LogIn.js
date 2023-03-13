@@ -31,26 +31,21 @@ const LogIn = () => {
     }
 
     return (
-        <div>
-            <h4> Login </h4>
-            <button onClick={((e) => {
-                    e.preventDefault() ;
-                    navigate("/Auth")
-                })}> 이전 </button>
+        <div className="Login">
             <form onSubmit={onSubmit}>
                 <input type="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="이메일"
                         required 
                         value={email}
                         onChange={onChange} />
                 <input type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="비밀번호"
                         required 
                         value={password}
                         onChange={onChange} />
-                <button> Log In </button>
+                <button> 로그인 </button>
             </form>
         </div>
     )

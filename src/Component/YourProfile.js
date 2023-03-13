@@ -7,8 +7,6 @@ import { db } from "../firebase";
 const YourProfile = ({feedUser, pathUID}) => {
     const {currentUser} = useContext(AuthContext) ;
     const [yourUser, setYourUser] = useState([]) ;
-    const url = `/feed/${feedUser.Data.UID}/${feedUser.DocID}` ; 
-    // const url = `/feed/${feed.Data.UID}/${feed.DocID}` ; 
     const navigate = useNavigate();
 
     const getLoginUser = async() => {
@@ -26,16 +24,18 @@ const YourProfile = ({feedUser, pathUID}) => {
     // console.log(yourUser)
     // console.log(feedUser)
     return(
-        <div style={{backgroundColor:"green", margin:"10px"}}>
-            <img src={yourUser.attachmentUrl} width="30px" height="30px" /> 
-            <p> {yourUser.displayName} </p> 
+        <div className="YourProfile">
+            {/* <div className="YourProfile_Profile">
+                <img src={yourUser.attachmentUrl} width="30px" height="30px" /> 
+                <p> {yourUser.displayName} </p> 
+            </div> */}
             {feedUser ? 
-            <div>
-                <img src={feedUser.Data.attachmentUrl} width="300px" height="300px" 
+            <div className="YourProfile_goFeed">
+                <img src={feedUser.Data.attachmentUrl} 
                     onClick={(() => {
                         navigate(`/feed/${feedUser.Data.UID}/${feedUser.DocID}`)
                     })}/> 
-                <p> {feedUser.Data.message} </p>
+                {/* <p> {feedUser.Data.message} </p> */}
             </div> : null}
         </div>
     )
