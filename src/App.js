@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <BrowserRouter>
+      <BrowserRouter basename="stargram">
           <Routes>
               <Route>
                 <Route index element={
