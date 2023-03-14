@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
-import Attach from '/Users/drizzle/stargram/src/img/instagram_sellectIMG.png'
+import Attach from '../img/instagram_sellectIMG.png'
 import { addDoc, collection, getDocs, query, Timestamp, where } from "firebase/firestore";
 
 const Write = ({userInfo}) => {
@@ -20,7 +20,6 @@ const Write = ({userInfo}) => {
         const getInfo = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
         const querySnapshot = await getDocs(getInfo);
         querySnapshot.forEach((doc) => {
-            // console.log(doc.id, " => ", doc.data());
             setDisplayName(doc.data().displayName)
         });
     } ;
@@ -82,7 +81,6 @@ const Write = ({userInfo}) => {
                 navigate("/")})}> 이전 </button>
             <form onSubmit={onSubmit} className="Write_form">
                 <h4> Write </h4>
-                {/* <img src={attachment} /> */}
                 <div className="Write_form_input">
                     <input type="textarea" 
                             placeholder="message..."

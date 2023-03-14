@@ -1,8 +1,8 @@
 import { signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Feed from "../Component/Feed";
 import { auth } from "../firebase";
-import SetUp from '/Users/drizzle/stargram/src/img/instagram_setup.png' ;  
+import SetUp from '../img/instagram_setup.png' ;  
 import { useState } from "react";
 
 const Home = () => {

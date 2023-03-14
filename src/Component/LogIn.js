@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase.js";
 
 const LogIn = () => {
@@ -22,7 +22,6 @@ const LogIn = () => {
         event.preventDefault();
         try {
             const data = await signInWithEmailAndPassword(auth, email, password) ;
-            // console.log(data) ; 
             navigate("/");
         } catch (err) {
             alert("다시 확인해주세요. (ex, 이미 가입된 정보 또는 이미 사용 중인 이메일입니다.)") ;

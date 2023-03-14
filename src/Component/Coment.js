@@ -25,10 +25,6 @@ const Coment = ({pathDocID}) => {
         ComentDoc() ;
     }, []) ;
 
-    // console.log("Coment Feed => ", feed)
-    // console.log(feedUser)
-    // console.log(coment)
-
     return (
         <div className="Coment">
             {coment.map((c, ID) => (

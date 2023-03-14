@@ -1,12 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { setDoc, doc } from "firebase/firestore"; 
 import { auth, db, storage } from "../firebase.js";
 import { getDownloadURL, uploadBytes, uploadString, ref } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
-import Attach from '/Users/drizzle/stargram/src/img/attach.png'
-import Profile from '/Users/drizzle/stargram/src/img/profile.jpg' ; 
+import Attach from '../img/attach.png'
+import Profile from '../img/profile.jpg' ; 
 
 const SignUp = () => {
     const navigate = useNavigate();

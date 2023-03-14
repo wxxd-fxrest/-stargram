@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { db, storage } from "../firebase";
 import { v4 as uuidv4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
 import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
-import Attach from '/Users/drizzle/stargram/src/img/attach.png'
+import Attach from '../img/attach.png'
 
 const Edit = () => {
     const [attachment, setAttachment] = useState("") ; 

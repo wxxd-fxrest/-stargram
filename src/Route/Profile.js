@@ -1,15 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
-import Coment from "../Component/Coment";
-import Delete from '/Users/drizzle/stargram/src/img/instagram_delete.png' ; 
+import Delete from '../img/instagram_delete.png' ; 
 
 const Profile = ({feed, userData}) => {
     const {currentUser} = useContext(AuthContext) ;
     const [feedUser, setFeedUser] = useState([]) ;
-    const url = `/feed/${feed.Data.UID}/${feed.DocID}` ; 
     const navigate = useNavigate();
 
     const getLoginUser = async() => {
@@ -31,12 +29,6 @@ const Profile = ({feed, userData}) => {
         }
     } ;
 
-    // console.log(feed)
-
-    // onClick={(() => { 
-    //     navigate(`/feed/${feed.Data.UID}/${feed.DocID}`)
-    // })} 
-
     return (
         <div>
             {currentUser.uid === feed.Data.UID ?
@@ -55,7 +47,6 @@ const Profile = ({feed, userData}) => {
                         <h6> {feed.Data.displayName} </h6>
                         <h5> {feed.Data.message} </h5>
                     </div>
-                    {/* <Coment feed={feed}/> */}
                     <button onClick={onDelete} id="DeleteImg" style={{display:"none"}}> 삭제 </button>
                     <label htmlFor="DeleteImg">
                         <img src={Delete} className="Profile_Delete"/>

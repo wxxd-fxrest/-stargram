@@ -1,16 +1,13 @@
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
-import Delete from '/Users/drizzle/stargram/src/img/instagram_delete.png' ; 
+import Delete from '../img/instagram_delete.png' ; 
 
 const Main = ({feed}) => {
     const {currentUser} = useContext(AuthContext) ; 
-    const [textarea, setTextarea] = useState("") ;
     const [feedUser, setFeedUser] = useState([]) ;
-    const url = `/feed/${feed.Data.UID}/${feed.DocID}` ; 
-    const profileUrl = `/Profile/${feed.Data.displayName}/${feed.Data.UID}`
     const navigate = useNavigate();
 
     const onDelete = async() => {
@@ -41,12 +38,7 @@ const Main = ({feed}) => {
         e.preventDefault()
         navigate(`/feed/${feed.Data.UID}/${feed.DocID}`);
     }
-
-    // console.log(feedUser)
-    // console.log(feed)
-    // console.log(DocID)
-    // console.log(userData)
-
+    
     return (
         <form onSubmit={(e) => {e.preventDefault()}}>
             <div>
@@ -79,47 +71,4 @@ const Main = ({feed}) => {
 export default Main ; 
 
 
-    //기존 Feed code >> 저장된 데이터 가져오기
-    // onSnapshot(collection(db, 'Feed'), (snapshot) => {
-    //     let feedArray = snapshot.docs.map(doc => ({
-    //         ...doc.data(),
-    //     }))
-    //     setFeed(feedArray)
-    // })
-
-    //기존 Main code >> 저장된 데이터 출력하기
-    // const feedAll = () => {
-    //     let arr = [] ;
-    //     if(feed) {
-    //         for(let i = 0; i < feed.length; i++) {
-    //             arr.push(
-    //                 <div key={i}>
-    //                 {feed ? 
-    //                     <div className="Main" >
-    //                         <h6> {feed[i].displayName} </h6>
-    //                         <img alt="" src={feed[i].attachmentUrl} width="200px" height="200px" />
-    //                         <h5> {feed[i].message} </h5>
-    //                         {feed[i].UID == currentUser.uid ? 
-    //                             <div>
-    //                                 <h4 value={feed[i].UUID}> {feed[i].UUID} </h4>
-    //                                 <button value={feed[i]} 
-    //                                         > 삭제 </button>
-    //                             </div> : null}
-    //                     </div> : null }
-    //                 </div>
-    //             )}}
-    //     return arr ;
-    // } ;
-
-    //기존 Write code >> 데이터 저장하기
-    // const feedUpload = doc(db, "Feed", "M4koF3uOGI9p59cmDrJG")
-    // return updateDoc(feedUpload, {
-    //         messages : arrayUnion({
-    //             UID: currentUser.uid,
-    //             displayName: displayName, 
-    //             message: messageText, 
-    //             UUID: uuidv4ID, 
-    //             date: Timestamp.now(),
-    //             attachmentUrl,
-    //     })
-    // })
+    

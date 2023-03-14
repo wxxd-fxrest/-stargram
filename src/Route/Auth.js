@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Login from '/Users/drizzle/stargram/src/Component/LogIn.js' ;
+import Login from '../Component/LogIn.js' ;
+
 const Auth = () => {
     const navigate = useNavigate();
 

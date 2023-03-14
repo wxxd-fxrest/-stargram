@@ -26,9 +26,6 @@ const Receive = ({coment, pathDocID}) => {
                     </div>
                     <h4> {coment.Data.Coment} </h4>
                 </div>
-                {/* <div className="Receive_Coment">
-                    <h4> {coment.Data.Coment} </h4>
-                </div> */}
                 {currentUser.uid == coment.Data.SendUID ? 
                     <div className="Receive_Delete">
                         <button onClick={onDelete} id="Receive_Delete_X" style={{display: "none"}}> X </button>

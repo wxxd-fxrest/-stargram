@@ -1,5 +1,4 @@
 html {
-  /* background-color: cadetblue; */
   text-align: center;
   height: 100vh;
   min-height: 100vh;
@@ -12,7 +11,6 @@ body {
   max-width: 700px;
   min-width: 700px;
   width: 700px;
-  /* height: 100vh; */
   min-height: 100vh;
   align-items: center;
   justify-content: center;
@@ -22,8 +20,6 @@ body {
   background-color: #ffffff;
   display: inline-flex;
   width: 400px;
-  /* height: 100vh; */
-  /* min-height: 100vh; */
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -196,7 +192,6 @@ body {
 .Home {
   border: solid 1px rgba(140, 140, 140, 0.4);
   border-radius: 10px;
-  /* background-color: #d7e58b; */
   flex-direction: column;
   max-width: 700px;
   min-width: 700px;
@@ -209,7 +204,6 @@ body {
 }
 
 .Home-Instagram > h4 {
-  /* background-color: aquamarine; */
   font-family: "Lobster", cursive;
   font-size: 40px;
   margin: 5px 0px 10px 0px;
@@ -257,7 +251,6 @@ body {
 /* ------------------------------------ */
 
 .Feed {
-  /* background-color: #7e8842; */
   display: inline-flex;
   align-items: center;
   flex-direction: column;
@@ -298,7 +291,6 @@ body {
   display: flex;
   border-top: solid 1px rgba(140, 140, 140, 0.4);
   border-bottom: solid 1px rgba(140, 140, 140, 0.4);
-  /* background-color: cadetblue; */
 }
 
 .Main_profile > img, .Profile_Profile > img {
@@ -340,19 +332,16 @@ body {
 }
 
 .Main_write, .Profile_Write {
-  /* background-color: #dae696; */
   display: flex;
 }
 
 .Main_write > h6, .Profile_Write > h6 {
-  /* background-color: #c9eb0c; */
   display: inline-flex;
   margin: 10px 10px 10px 10px; 
   font-size: 14px;
 }
 
 .Main_write > h5, .Profile_Write > h5 {
-  /* background-color: #748707; */
   display: inline-flex;
   margin: 10px 10px 10px 0px; 
   font-size: 14px;
@@ -362,7 +351,6 @@ body {
 /* ------------------------------------ */
 
 .AboutProfile {
-  /* background-color: wheat; */
   border: solid 1px rgba(140, 140, 140, 0.4);
   border-radius: 10px;
   flex-direction: column;
@@ -504,13 +492,8 @@ body {
   position: relative;
 }
 
-.AboutFeed_Feed > button {
-  position: absolute;
-}
 
 .AboutFeed_Feed > img {
-  /* display: inline-flex;
-  float: left; */
   margin: 5px 0px 5px 5px;
   border-radius: 5px;
   width: 200px;
@@ -519,12 +502,22 @@ body {
   height: fit-content;
 }
 
-.AboutFeed_delete {
+.AboutFeed_X {
   position: absolute;
-  width: 23px;
+  left: 470px;
+}
+
+.AboutFeed_X > label {
+  display: flex;
+  position: relative;
+  width: 50px;
+}
+
+.AboutFeed_X > label > img {
+  position: absolute;
+  width: 25px;
   top: 5px;
-  right: 10px;
-  cursor: pointer;
+  right: 0px;
 }
 
 .AboutFeed_Write {
@@ -539,7 +532,6 @@ body {
 }
 
 .AboutFeed_Write > p {
-  /* width: 300px; */
   margin: 5px 10px 5px 10px;
   font-size: 13px;
   font-weight: 400;
@@ -568,10 +560,8 @@ body {
 /* ------------------------------------ */
 
 .Coment {
-  /* background-color: antiquewhite; */
   display: flex;
   flex-direction: column;
-  /* border-top: solid 1px rgba(140, 140, 140, 0.4); */
   width: 525px;
   height: 400px;
   overflow: scroll;
@@ -579,21 +569,17 @@ body {
 }
 
 .Receive {
-  /* background-color: thistle; */
   margin: 5px 30px 5px 10px ;
   border-top: solid 1px rgba(140, 140, 140, 0.4);
 }
 
 .Receive_Profile {
-  /* background-color: violet; */
   width: 100%;
   margin: 0px;
 }
 
 .Receive_Profile_imgname {
-  /* background-color: rgb(122, 94, 56); */
   display: inline-flex;
-  /* width: 100px; */
   float: left;
   position: relative;
 }
@@ -606,39 +592,25 @@ body {
 }
 
 .Receive_Profile_imgname > h6 {
-  /* background-color: #f34848; */
   margin: 0px;
   font-size: 13px;
   position: absolute;
   top: 50px;
   left: 10px;
+  font-weight: 500;
 }
 
 .Receive_Profile {
   display: inline-flex;
-  /* background-color: #904747; */
   margin: 0px;
-  /* width: 400px; */
   float: right;
 }
 
 .Receive_Profile > h4 {
   margin: 10px 5px 5px 5px ;
+  font-weight: 500;
+  font-size: 13px;
 }
-
-/* .Receive_Coment {
-  background-color: steelblue;
-  width: 390px;
-  text-align: start;
-  margin: 0px;
-}
-
-.Receive_Coment > h4 {
-  background-color: rgb(161, 207, 246);
-  margin: 0px;
-
-} */
-
 
 .Receive_Delete {
   background-color: #383838;
@@ -648,12 +620,13 @@ body {
 }
 
 .Receive_Delete > label > h3 {
-  /* background-color: #f34848; */
   position: absolute;
   margin: 0px;
   left: 490px;
   top: -10px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
 }
 
 
@@ -755,7 +728,6 @@ body {
 }
 
 .Dm_mine {
-  /* background-color: rgb(255, 204, 195); */
   border: solid 1px rgb(148, 204, 250);
   max-width: max-content;
   border-radius: 17px 17px 5px 17px;   
@@ -776,7 +748,6 @@ body {
 /* ------------------------------------ */
 
 .AllDirectMessage {
-  /* background-color: wheat; */
   display: flex;
   position: relative;
   flex-direction: column;
@@ -790,7 +761,6 @@ body {
 }
 
 .AllDirectMessage > h4 {
-  /* background-color: #383838; */
   display: flex;
   font-size: 17px;
   font-weight: 600;
@@ -843,7 +813,6 @@ body {
   display: flex;
   position: relative;
   flex-direction: column;
-  /* text-align: start; */
   border: solid 1px rgba(140, 140, 140, 0.4);
   border-radius: 10px;
   padding: 10px;
@@ -920,7 +889,6 @@ body {
 }
 
 .Write_attach_label > img {
-  /* background-color: #383838; */
   margin-bottom: 25px;
   width: 300px;
   opacity: 0.7;
@@ -929,11 +897,9 @@ body {
 /* ------------------------------------ */
 
 .Edit {
-  /* background-color: wheat; */
   display: flex;
   position: relative;
   flex-direction: column;
-  /* text-align: start; */
   border: solid 1px rgba(140, 140, 140, 0.4);
   border-radius: 10px;
   padding: 10px;
@@ -961,7 +927,6 @@ body {
 }
 
 .Edit_Attachment {
-  /* background-color: thistle; */
   flex-direction: column;
   display: inline-flex;
   width: 100%;
@@ -1023,7 +988,6 @@ body {
 .Edit_displayName_OK {
   background-color: white;
   border: solid 1px rgb(75, 162, 255, 0.8);
-  /* margin-left: 40px; */
   border-radius: 10px;
   width: 40px;
   height: 35px;

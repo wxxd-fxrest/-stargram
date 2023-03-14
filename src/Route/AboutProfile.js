@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, setDoc, where } from "firebase/firestore";
+import { collection, doc, getDocs, onSnapshot, orderBy, query, setDoc, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import YourProfile from "../Component/YourProfile";
@@ -86,13 +86,6 @@ const AboutProfile = () => {
             })
         } 
     }
-    // console.log(getPathInfo)
-    // console.log("pathDmDocID => ", pathDmDocID) ;
-    // console.log("currentDmDocID => ", currentDmDocID)
-    // console.log(feedUser) ;
-    // console.log(dmDocID) 
-    // console.log("pathUID => ", pathDmDocID) ; //8zKekI0LDPg11gJLgk82irMSrZf1 >> 상대방 
-    // console.log("currentUser => ", currentDmDocID) ; //j8AKBlYVmtTV3pAJ7QR69dJRPEj2 >> login user
 
     return (
         <div className="AboutProfile">

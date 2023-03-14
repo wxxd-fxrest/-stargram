@@ -1,4 +1,4 @@
-import { collection, getDocs, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
@@ -18,7 +18,6 @@ const AllDirectMessage = () => {
                     DocID: doc.id, 
                     Data: doc.data(),
                 })
-                // console.log(doc.data())
             });
             setDmDoc(feedArray) ; 
         });

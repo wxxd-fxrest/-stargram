@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, Timestamp } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, onSnapshot, orderBy, query, Timestamp } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
@@ -11,15 +11,12 @@ const Dm = () => {
     const [pathUserInfo, setPathUserInfo] = useState([]) ; 
     const [currentUserInfo, setCurrentUserInfo] = useState([]) ; 
     const [loginMessage, setLoginMessage] = useState([]) ; 
-    // const [pathtMessage, setPathtMessage] = useState([]) ; 
     const location = useLocation() ;
     const navigate = useNavigate();
 
     const pathname = location.pathname ; 
     const pathUID= (pathname.split('/')[2]);
     const currentUID = (pathname.split('/')[3]);
-    // console.log(pathUID)
-    // console.log(currentUID)
 
     const getPathInfo = async () => {
         const pathUser = doc(db, "Users", pathUID);
@@ -40,25 +37,7 @@ const Dm = () => {
             });
             setLoginMessage(feedArray)
         });
-
-        // const pathMessage = query(collection(db, "Users", `${pathUID}`, "DM", `${currentUID}`, "DirectMessage"), 
-        //     orderBy("date", "asc"));
-        // onSnapshot(pathMessage, (querySnapshot) => {
-        //     let feedArray = []
-        //     querySnapshot.forEach((doc) => {
-        //         feedArray.push({
-        //             Data: doc.data(), 
-        //         })
-        //     });
-        //     setPathtMessage(feedArray)
-        // });
     } ;
-
-    // console.log(loginMessage)
-    // console.log(pathtMessage)
-
-    // console.log(pathUserInfo)
-    // console.log(currentUserInfo)
 
     useEffect(() => {
         getPathInfo()
@@ -87,7 +66,6 @@ const Dm = () => {
     return (
         <div className="DM">
             <div className="DM_back">
-                {/* <p> Direct Message </p> */}
                 <p> {pathUserInfo.displayName} </p>
                 <button onClick={((e) => {
                         e.preventDefault() ;

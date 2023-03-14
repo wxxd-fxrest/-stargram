@@ -1,10 +1,10 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, Timestamp, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, Timestamp } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Coment from "../Component/Coment";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
-import Delete from '/Users/drizzle/stargram/src/img/instagram_delete.png' ; 
+import Delete from '../img/instagram_delete.png' ; 
 
 const AboutFeed = ({sendUser}) => {
     const {currentUser} = useContext(AuthContext) ;
@@ -60,12 +60,6 @@ const AboutFeed = ({sendUser}) => {
         getFeed()
     }, []) ; 
 
-    // console.log("feed => ", feed)
-    // console.log("userData => ", userData)
-    // console.log(userData2)
-    // console.log(sendUser)
-    // console.log("pathDocID => ", pathDocID, "pathUID => ", pathUID)
-
     return (
         <div className="AboutFeed">
             <button onClick={((e) => {
@@ -86,14 +80,14 @@ const AboutFeed = ({sendUser}) => {
                         <p> {feed.message} </p>
                     </div>
                     {pathUID == currentUser.uid && 
-                    <>
+                    <div className="AboutFeed_X">
                         <button onClick={onDelete} id="DeleteImg" style={{display:"none"}}> 
                             삭제 
                         </button> 
                         <label htmlFor="DeleteImg">
                             <img src={Delete} className="AboutFeed_delete"/>
                         </label>
-                    </>}
+                    </div>}
                 </div>
 
                     <Coment feed={feed} pathDocID={pathDocID}/>
