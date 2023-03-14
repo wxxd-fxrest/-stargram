@@ -6,7 +6,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 import Delete from '/Users/drizzle/stargram/src/img/instagram_delete.png' ; 
 
-const AboutFeed = () => {
+const AboutFeed = ({sendUser}) => {
     const {currentUser} = useContext(AuthContext) ;
     const location = useLocation() ;
     const [feed, setFeed] = useState("") ;
@@ -14,7 +14,6 @@ const AboutFeed = () => {
     const [userData, setUserData] = useState("") ;
     const navigate = useNavigate();
 
-    const [sendUser, setSendUser] = useState("") ;
 
     const pathname = location.pathname ; 
     const pathUID = (pathname.split('/')[2]);
@@ -28,34 +27,33 @@ const AboutFeed = () => {
         const docRef = doc(db, "Users", pathUID);
         const docSnap = await getDoc(docRef);
             setUserData(docSnap.data());
-
-        const getUserData = query(collection(db, "Users"), where("uid", "==", `${currentUser.uid}`));
-        const querySnapshot = await getDocs(getUserData);
-        querySnapshot.forEach((doc) => {
-            setSendUser(doc.data()) ;
-        }); 
     } ;
 
     const onDelete = async() => {
-        const ok = window.confirm("삭제 ㄱㄱ??")
+        const ok = window.confirm("게시글을 삭제하시겠습니까?")
         if(ok) {
             await deleteDoc(doc(db, "Feed", `${pathDocID}`)); 
+            navigate("/") ;
         }
-        navigate("/") ;
     } ;
 
     const onClick = async() => {
-        await addDoc(collection(db, "Feed", `${pathDocID}`, "Coment"), {
-            FeedDocID : pathDocID, 
-            Coment : textarea, 
-            ReceiveName : feed.displayName,
-            ReceiveUID : feed.UID,
-            SendName : sendUser.displayName, 
-            SendUID : currentUser.uid, 
-            SendPhotoURL : sendUser.attachmentUrl,
-            date: Timestamp.now(),
-        })
-        setTextarea("") ;
+        if(sendUser) {
+            await addDoc(collection(db, "Feed", `${pathDocID}`, "Coment"), {
+                FeedDocID : pathDocID, 
+                Coment : textarea, 
+                ReceiveName : feed.displayName,
+                ReceiveUID : feed.UID,
+                SendName : sendUser.displayName, 
+                SendUID : currentUser.uid, 
+                SendPhotoURL : sendUser.attachmentUrl,
+                date: Timestamp.now(),
+            })
+            setTextarea("") ;
+        } else {
+            alert("잠시후 다시 시도해주세요.") ;
+            navigate("/") ;
+        }
     } ;
 
     useEffect(() => {

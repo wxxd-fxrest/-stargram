@@ -61,6 +61,7 @@ const Edit = () => {
         await updateDoc(doc(db, "Users", `${currentUser.uid}`), {
             displayName: displayName,
         })
+        navigate("/");
     }
 
     const onFileChange = (event) => {
@@ -78,13 +79,13 @@ const Edit = () => {
     } ; 
 
     return (
-        <div>
-            <h3> edit </h3>
+        <div className="Edit">
+            <h3> Profile Edit </h3>
             <button onClick={((e) => {
                     e.preventDefault() ;
                     navigate("/")
                 })}> 이전 </button>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className="Edit_Attachment">
                 {attachment ? 
                 <>
                     <img src={attachment} width="200px" height="200px" />
@@ -96,7 +97,7 @@ const Edit = () => {
                     <label htmlFor="inputFile">
                         <img src={Attach} alt="" />
                     </label>
-                    <input type="submit" value="OK"/> 
+                    <input type="submit" value="OK" className="Edit_Attachment_OK"/> 
                 </> : <>
                     <img src={userData.attachmentUrl} width="200px" height="200px" />
                     <input type="file"
@@ -109,24 +110,27 @@ const Edit = () => {
                     </label>
                 </>}
             </form>
-            <form onSubmit={onSubmitName}>
-            {displayName ? 
-                <>
-                <input type="text"
-                        name="displayName"
-                        placeholder={displayName}
-                        required 
-                        value={displayName}
-                        onChange={onChange} />
-                <input type="submit" value="OK"/> 
-                </> : <>
-                <input type="text"
-                        name="displayName"
-                        placeholder={userData.displayName}
-                        required 
-                        value={displayName}
-                        onChange={onChange} />
-                </>}
+            <form onSubmit={onSubmitName} className="Edit_displayName">
+                {displayName ? 
+                    <>
+                    <input type="text"
+                            name="displayName"
+                            placeholder={displayName}
+                            required 
+                            maxLength="6"
+                            value={displayName}
+                            onChange={onChange} 
+                            className="Edit_displayName_input"/>
+                    <input type="submit" value="OK" className="Edit_displayName_OK"/> 
+                    </> : <>
+                    <input type="text"
+                            name="displayName"
+                            placeholder={userData.displayName}
+                            required 
+                            value={displayName}
+                            onChange={onChange} 
+                            className="Edit_displayName_input"/>
+                    </>}
             </form>
         </div>
     )

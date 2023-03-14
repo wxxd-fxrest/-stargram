@@ -65,20 +65,22 @@ const Dm = () => {
     }, []) ; 
 
     const onClick = async() => {
-        await addDoc(collection(db, "Users", `${pathUID}`, "DM", `${currentUID}`, "DirectMessage"), {
-            RecevieName : pathUserInfo.displayName, 
-            SendName : currentUserInfo.displayName,
-            SendUID : currentUser.uid,
-            sendMessage : textarea, 
-            date: Timestamp.now(),
-        })
-        await addDoc(collection(db, "Users", `${currentUID}`, "DM", `${pathUID}`, "DirectMessage"), {
-            RecevieName : currentUserInfo.displayName,
-            ReceiveUID : currentUser.uid,
-            SendName : pathUserInfo.displayName, 
-            sendMessage : textarea, 
-            date: Timestamp.now(),
-        })
+        if(textarea !== "") {
+            await addDoc(collection(db, "Users", `${pathUID}`, "DM", `${currentUID}`, "DirectMessage"), {
+                RecevieName : pathUserInfo.displayName, 
+                SendName : currentUserInfo.displayName,
+                SendUID : currentUser.uid,
+                sendMessage : textarea, 
+                date: Timestamp.now(),
+            })
+            await addDoc(collection(db, "Users", `${currentUID}`, "DM", `${pathUID}`, "DirectMessage"), {
+                RecevieName : currentUserInfo.displayName,
+                ReceiveUID : currentUser.uid,
+                SendName : pathUserInfo.displayName, 
+                sendMessage : textarea, 
+                date: Timestamp.now(),
+            })
+        }
         setTextarea("") ;
     } ;
 

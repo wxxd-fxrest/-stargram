@@ -14,7 +14,7 @@ const Main = ({feed}) => {
     const navigate = useNavigate();
 
     const onDelete = async() => {
-        const ok = window.confirm("삭제 ㄱ?")
+        const ok = window.confirm("게시글을 삭제하시겠습니까?")
         if(ok) {
             await deleteDoc(doc(db, "Feed", `${feed.DocID}`)); 
         }

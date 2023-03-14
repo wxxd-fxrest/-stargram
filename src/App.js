@@ -14,6 +14,7 @@ import AboutProfile from './Route/AboutProfile';
 import DirectMessage from './Route/DirectMessage';
 import Dm from './Component/Dm';
 import AllDirectMessage from './Route/AllDirectMessage';
+import FeedProps from './Component/FeedProps';
 
 const App = () => {
   const {currentUser} = useContext(AuthContext) ; 
@@ -54,7 +55,7 @@ const App = () => {
                 <Route path='/LogIn' element={<LogIn />} />
                 <Route path='/SignUp' element={<SignUp />} />
                 <Route path='/Dm/:uid/:uid' element={<Dm />} />
-                <Route path='/feed/:uid/:DocID' element={<AboutFeed />} />
+                <Route path='/feed/:uid/:DocID' element={<FeedProps />} />
                 <Route path='/Profile/:displayName/:uid' element={<AboutProfile />} />
               </Route>
           </Routes>
