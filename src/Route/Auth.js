@@ -7,7 +7,7 @@ const Auth = () => {
     return (
         <div className="Auth">
             <div className="Auth-Login">
-                <h4> Instagram </h4>
+                <h4> WoodStargram </h4>
                 <Login />
             </div>
             <div className="Auth-SignUp">

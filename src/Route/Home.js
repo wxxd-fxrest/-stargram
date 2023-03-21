@@ -17,7 +17,7 @@ const Home = () => {
         <div className="Home">
             <div className="Home-Instagram">
                 <img src={SetUp} onClick={onClick}/>
-                <h4> Instagram </h4>
+                <h4> WoodStargram </h4>
                 {more ? 
                 <div className="Btn-All">
                     <div>

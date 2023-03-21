@@ -73,7 +73,7 @@ const SignUp = () => {
 
     return (
         <div className="SignUp">
-            <h4> Instagram </h4>
+            <h4> WoodStargram </h4>
             <div className="SignUp-back">
                 <button onClick={((e) => {
                         e.preventDefault() ;
