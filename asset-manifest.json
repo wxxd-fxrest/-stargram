@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/stargram/static/css/main.587a4cf8.css",
+    "main.css": "/stargram/static/css/main.c5c19739.css",
     "main.js": "/stargram/static/js/main.28069d63.js",
     "static/media/profile.jpg": "/stargram/static/media/profile.043d6a40f03c869bde88.jpg",
     "static/media/instagram_delete.png": "/stargram/static/media/instagram_delete.8c79fbbf038fcda414c3.png",
     "static/media/instagram_sellectIMG.png": "/stargram/static/media/instagram_sellectIMG.2848fab31fbec1d17800.png",
     "index.html": "/stargram/index.html",
-    "main.587a4cf8.css.map": "/stargram/static/css/main.587a4cf8.css.map",
+    "main.c5c19739.css.map": "/stargram/static/css/main.c5c19739.css.map",
     "main.28069d63.js.map": "/stargram/static/js/main.28069d63.js.map"
   },
   "entrypoints": [
-    "static/css/main.587a4cf8.css",
+    "static/css/main.c5c19739.css",
     "static/js/main.28069d63.js"
   ]
 }
